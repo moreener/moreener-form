@@ -912,7 +912,51 @@ function removeSlotPhoto(e, type, idx) {
   photoStore[type][idx] = null;
 }
 
-/* ━━━ 구글 드라이브 사진 업로드 ━━━ */
+/* ━━━ 구글 드라이브 직접 업로드 ━━━ */
+async function getUploadToken() {
+  try {
+    const res  = await fetch(SHEET_URL + '?action=token');
+    const json = await res.json();
+    if (json.ok) return { token: json.token, folderId: json.folderId };
+  } catch(e) {}
+  return null;
+}
+
+async function createSubFolder(token, parentId, folderName) {
+  try {
+    const res = await fetch('https://www.googleapis.com/drive/v3/files', {
+      method: 'POST',
+      headers: {
+        'Authorization': 'Bearer ' + token,
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        name: folderName,
+        mimeType: 'application/vnd.google-apps.folder',
+        parents: [parentId],
+      }),
+    });
+    const json = await res.json();
+    return json.id;
+  } catch(e) { return null; }
+}
+
+async function uploadFileToDrive(token, folderId, blob, fileName) {
+  try {
+    const metadata = JSON.stringify({ name: fileName, parents: [folderId] });
+    const form = new FormData();
+    form.append('metadata', new Blob([metadata], { type: 'application/json' }));
+    form.append('file', blob, fileName);
+
+    await fetch('https://www.googleapis.com/upload/drive/v3/files?uploadType=multipart', {
+      method: 'POST',
+      headers: { 'Authorization': 'Bearer ' + token },
+      body: form,
+    });
+    return true;
+  } catch(e) { return false; }
+}
+
 async function compressImage(file, maxWidth = 1600, quality = 0.8) {
   return new Promise((resolve) => {
     const img = new Image();
@@ -924,48 +968,10 @@ async function compressImage(file, maxWidth = 1600, quality = 0.8) {
       canvas.width = w; canvas.height = h;
       canvas.getContext('2d').drawImage(img, 0, 0, w, h);
       URL.revokeObjectURL(url);
-      canvas.toBlob(blob => resolve(blob), 'image/jpeg', quality);
+      canvas.toBlob(blob => resolve(blob || file), 'image/jpeg', quality);
     };
-    img.onerror = () => resolve(file); // 실패 시 원본 사용
+    img.onerror = () => resolve(file);
     img.src = url;
-  });
-}
-
-async function uploadPhotoToDrive(file, fileName, type) {
-  return new Promise((resolve) => {
-    const doUpload = async (blob) => {
-      const reader = new FileReader();
-      reader.onload = async (e) => {
-        try {
-          const base64 = e.target.result.split(',')[1];
-          const persons = [
-            document.getElementById('name1')?.value || '',
-            document.getElementById('name2')?.value || ''
-          ].filter(Boolean).join('_') || 'unknown';
-
-          await fetch(SHEET_URL + '?action=upload', {
-            method: 'POST',
-            mode: 'no-cors',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({
-              action: 'upload',
-              fileName: (type === 'photo' ? '인물_' : '장면_') + fileName.replace(/\.[^.]+$/, '') + '.jpg',
-              fileData: base64,
-              mimeType: 'image/jpeg',
-              orderId: currentId,
-              persons: persons,
-            }),
-          });
-          resolve(true);
-        } catch(err) {
-          resolve(false);
-        }
-      };
-      reader.readAsDataURL(blob);
-    };
-
-    // 이미지 압축 후 업로드
-    compressImage(file).then(blob => doUpload(blob));
   });
 }
 
@@ -976,16 +982,30 @@ async function uploadAllPhotos() {
   ];
   if (!allPhotos.length) return;
 
-  // 3장씩 묶어서 병렬 업로드 (Apps Script 동시 요청 제한 고려)
+  // 1. 토큰 + 메인 폴더 ID 가져오기
+  const auth = await getUploadToken();
+  if (!auth) { console.error('토큰 발급 실패'); return; }
+
+  // 2. 고객별 서브 폴더 생성
+  const persons = [
+    document.getElementById('name1')?.value || '',
+    document.getElementById('name2')?.value || '',
+  ].filter(Boolean).join('_') || 'unknown';
+  const subFolderName = currentId + '_' + persons;
+  const subFolderId   = await createSubFolder(auth.token, auth.folderId, subFolderName);
+  if (!subFolderId) { console.error('폴더 생성 실패'); return; }
+
+  // 3. 사진 압축 후 업로드 (3장씩 병렬)
+  const btn = document.getElementById('sub-btn');
   const chunkSize = 3;
   for (let i = 0; i < allPhotos.length; i += chunkSize) {
     const chunk = allPhotos.slice(i, i + chunkSize);
-    await Promise.all(chunk.map((p, j) => {
-      const fileName = `${i + j + 1}_${p.file.name}`;
-      return uploadPhotoToDrive(p.file, fileName, p.type);
+    await Promise.all(chunk.map(async (p, j) => {
+      const compressed = await compressImage(p.file);
+      const prefix     = p.type === 'photo' ? '인물_' : '장면_';
+      const fileName   = prefix + (i + j + 1) + '_' + p.file.name.replace(/\.[^.]+$/, '') + '.jpg';
+      return uploadFileToDrive(auth.token, subFolderId, compressed, fileName);
     }));
-    // 버튼 진행 표시
-    const btn = document.getElementById('sub-btn');
     if (btn) btn.textContent = `사진 업로드 중... (${Math.min(i + chunkSize, allPhotos.length)}/${allPhotos.length})`;
   }
 }
