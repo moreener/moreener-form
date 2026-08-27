@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 <meta name="color-scheme" content="light only">
 <meta name="theme-color" content="#ffffff">
-<title>moreen — 웨딩 러브스토리 액자 Story Form</title>
+<title>moreen — Story Form</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700&family=Plus+Jakarta+Sans:wght@300;400&display=swap" rel="stylesheet">
 <style>
@@ -15,8 +15,6 @@
   --ink-dk:  #3A3A36;
   --ink-mid: #5C5C54;
   --ink-lt:  #A8A89E;
-  --ink-sub: #5E5E58;   /* 보조 설명 공통 · 흰배경 대비 6.5:1 */
-  --ink-ph:  #8C8C82;   /* 답변칸 placeholder */
   --border:  #E6E5DC;
   --off:     #F8F7F2;
   --ivory:   #F2F0E8;
@@ -92,25 +90,20 @@ body {
 .cover { padding: 84px 26px 50px; border-bottom: 1px solid var(--border); }
 .cover-eyebrow { font-size: 10px; letter-spacing: 4px; color: var(--mint-dk); text-transform: uppercase; margin-bottom: 22px; font-weight: 400; }
 .cover-title { font-family: var(--serif); font-size: 34px; line-height: 1.22; color: var(--black); margin-bottom: 18px; letter-spacing: -0.5px; font-weight: 300; }
-.cover-sub { font-size: 14px; color: var(--ink-sub); line-height: 1.95; margin-bottom: 28px; font-weight: 400; }
+.cover-sub { font-size: 14px; color: var(--ink-dk); line-height: 1.95; margin-bottom: 28px; font-weight: 300; }
 .cover-sub strong { color: var(--ink); font-weight: 500; }
 .cover-badge { display: inline-flex; align-items: center; gap: 7px; background: var(--mint-lt); color: var(--mint-dk); font-size: 12px; padding: 7px 15px; border-radius: var(--r-lg); font-weight: 500; border: 1px solid var(--mint-bd); }
 .cover-badge::before { content: ''; width: 6px; height: 6px; border-radius: 50%; background: var(--mint-dk); opacity: 0.7; }
 
 /* ── REQ NOTE ── */
-.req-note { font-size: 11.5px; color: var(--ink-sub); padding: 14px 26px; border-bottom: 1px solid var(--border); background: var(--off); }
+.req-note { font-size: 11.5px; color: var(--ink-mid); padding: 14px 26px; border-bottom: 1px solid var(--border); background: var(--off); }
 
 /* ── SECTION ── */
 .section { padding: 38px 26px 0; }
-.section-head { display: flex; align-items: center; gap: 10px; margin-bottom: 6px; }
-.section-num {
-  flex:none; width:23px; height:23px; display:flex; align-items:center; justify-content:center;
-  font-family:'Plus Jakarta Sans',sans-serif; font-size:12px; font-weight:400; letter-spacing:0;
-  color:var(--mint-dk); background:var(--mint-bg);
-  border:1.5px solid var(--mint-bd); border-radius:50%;
-}
+.section-head { display: flex; align-items: baseline; gap: 10px; margin-bottom: 6px; }
+.section-num { font-size: 11px; color: var(--mint-dk); font-weight: 500; letter-spacing: 1px; }
 .section-title { font-size: 18px; font-weight: 500; color: var(--black); letter-spacing: -0.1px; }
-.section-opt { font-size: 10px; color: var(--ink-sub); background: var(--ivory); padding: 2px 8px; border-radius: 20px; font-weight: 400; margin-left: 4px; border: 1px solid var(--border); }
+.section-opt { font-size: 10px; color: var(--ink-mid); background: var(--ivory); padding: 2px 8px; border-radius: 20px; font-weight: 400; margin-left: 4px; border: 1px solid var(--border); }
 .section-divider { height: 1px; background: var(--border); margin: 14px 0 24px; border: none; }
 
 /* ── CARD ── */
@@ -118,11 +111,15 @@ body {
 .card:focus-within { border-color: var(--ink-lt); }
 .label { font-size: 13px; font-weight: 500; color: var(--black); margin-bottom: 4px; display: flex; align-items: center; flex-wrap: wrap; gap: 5px; }
 .req { color: var(--rose); font-weight: 400; font-size: 20px; line-height: 1; }
-.hint { font-size: 12.5px; color: var(--ink-sub); margin-bottom: 13px; line-height: 1.75; font-weight: 400; }
+.hint { font-size: 12.5px; color: var(--ink-mid); margin-bottom: 13px; line-height: 1.75; font-weight: 300; }
 .hint strong { color: var(--ink-dk); font-weight: 500; }
-.hint em { color: var(--ink-sub); font-style: normal; font-weight: 400; font-size: 11.5px; line-height: 1.7; display: block; margin-top: 4px; }
+.hint em { color: var(--ink-mid); font-style: normal; font-weight: 300; font-size: 11px; line-height: 1.7; display: block; margin-top: 4px; }
 
 /* scene input 두 줄 허용 */
+.scene-row input {
+  white-space: normal;
+  overflow: visible;
+}
 
 /* ── INPUTS ── */
 input[type="text"], input[type="tel"], input[type="email"], textarea {
@@ -131,7 +128,7 @@ input[type="text"], input[type="tel"], input[type="email"], textarea {
   outline: none; transition: border-color 0.18s, background 0.18s; -webkit-appearance: none; resize: none;
 }
 input:focus, textarea:focus { border-color: var(--ink-lt); background: #FFFFFF; }
-input::placeholder, textarea::placeholder { color: var(--ink-ph); font-weight: 300; }
+input::placeholder, textarea::placeholder { color: var(--ink-lt); font-weight: 300; }
 .input-row { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
 
 /* ── TYPE CARDS ── */
@@ -161,12 +158,17 @@ input::placeholder, textarea::placeholder { color: var(--ink-ph); font-weight: 3
 .size-card.active .size-price { background: var(--mint); border-color: var(--mint-bd); color: var(--black); }
 
 /* ── CHIPS ── */
+.chip-group { display: flex; flex-wrap: wrap; gap: 7px; }
+.chip { padding: 7px 15px; border: 1.5px solid var(--border); border-radius: 20px; font-size: 12.5px; font-weight: 300; color: var(--ink-dk); background: var(--off); cursor: pointer; transition: all 0.15s; user-select: none; -webkit-tap-highlight-color: transparent; }
+.chip.active { background: var(--black); border-color: var(--black); color: #FFFFFF; font-weight: 400; }
 
 /* ── SCENES ── */
 .scene-list { display: flex; flex-direction: column; gap: 7px; }
+.scene-row { display: flex; align-items: center; gap: 10px; }
+.scene-n { width: 24px; height: 24px; border: 1.5px solid var(--border); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 11px; font-weight: 500; color: var(--ink-mid); flex-shrink: 0; background: var(--off); }
 
 /* ── NOTICE ── */
-.notice { background: var(--mint-bg); border: 1px solid var(--mint-bd); border-radius: var(--r-md); padding: 14px 16px; margin-bottom: 12px; font-size: 12.5px; color: var(--ink-sub); line-height: 1.85; font-weight: 400; }
+.notice { background: var(--mint-bg); border: 1px solid var(--mint-bd); border-radius: var(--r-md); padding: 14px 16px; margin-bottom: 12px; font-size: 12.5px; color: var(--ink-dk); line-height: 1.85; font-weight: 300; }
 .notice strong { color: var(--ink); font-weight: 500; }
 
 /* ── PHOTO SLOTS ── */
@@ -189,6 +191,11 @@ input::placeholder, textarea::placeholder { color: var(--ink-ph); font-weight: 3
 .photo-slot-del { position: absolute; top: -4px; right: -4px; width: 18px; height: 18px; background: var(--black); color: white; border: none; border-radius: 50%; font-size: 11px; cursor: pointer; display: flex; align-items: center; justify-content: center; padding: 0; z-index: 2; }
 
 /* ── CONSENT ── */
+.consent-card { border: 1.5px solid var(--border); border-radius: var(--r-md); padding: 18px 20px; margin-bottom: 10px; background: var(--off); }
+.consent-row { display: flex; align-items: flex-start; justify-content: space-between; gap: 14px; }
+.consent-title { font-size: 13px; font-weight: 500; color: var(--black); margin-bottom: 4px; }
+.consent-sub { font-size: 12px; color: var(--ink-mid); line-height: 1.7; font-weight: 300; }
+.consent-sub em { color: var(--mint-dk); font-style: normal; font-weight: 500; }
 .toggle { position: relative; width: 44px; height: 25px; flex-shrink: 0; margin-top: 2px; }
 .toggle input { opacity: 0; width: 0; height: 0; position: absolute; }
 .toggle-track { position: absolute; inset: 0; background: var(--border); border-radius: 13px; cursor: pointer; transition: background 0.22s; }
@@ -200,8 +207,8 @@ input::placeholder, textarea::placeholder { color: var(--ink-ph); font-weight: 3
 .submit-wrap { padding: 0 26px; margin-top: 30px; }
 .submit-section { border: 1.5px solid var(--border); border-radius: var(--r-lg); padding: 30px 26px; text-align: center; background: var(--mint-bg); }
 .submit-title { font-size: 20px; font-weight: 700; color: var(--black); margin-bottom: 9px; }
-.submit-sub { font-size: 13px; color: var(--ink-sub); margin-bottom: 26px; line-height: 1.85; font-weight: 400; }
-.submit-sub strong { color: var(--ink); font-weight: 500; }
+.submit-sub { font-size: 13px; color: var(--ink-mid); margin-bottom: 26px; line-height: 1.85; font-weight: 300; }
+.submit-sub strong { color: var(--ink-dk); font-weight: 500; }
 .submit-btn { display: block; width: 100%; background: var(--black); color: #FFFFFF; font-size: 14px; font-weight: 500; font-family: var(--sans); padding: 16px 24px; border-radius: var(--r-sm); border: none; cursor: pointer; letter-spacing: 0.4px; transition: opacity 0.15s; -webkit-tap-highlight-color: transparent; }
 .submit-btn:active { opacity: 0.8; }
 .submit-btn.loading { opacity: 0.45; pointer-events: none; }
@@ -232,116 +239,6 @@ input::placeholder, textarea::placeholder { color: var(--ink-ph); font-weight: 3
 #lightbox-counter { font-size: 11px; color: rgba(255,255,255,0.35); margin-top: 8px; }
 
 .gap8 { height: 8px; }
-
-/* ── 장면 구성 Q&A ── */
-.q-counter { display:flex; align-items:center; justify-content:space-between; gap:10px;
-  font-size:12.5px; font-weight:500; color:var(--mint-dk); background:var(--mint-bg);
-  border:1.5px solid var(--mint-bd); border-radius:var(--r-md);
-  padding:12px 14px; margin-bottom:14px; line-height:1.7; }
-.q-counter.over { color:var(--rose); background:#FDF2F2; border-color:#E8BDBD; }
-.q-count-badge { flex:none; font-family:'Plus Jakarta Sans',sans-serif; font-weight:400;
-  font-size:13px; background:#FFF; border:1.5px solid var(--mint-bd);
-  border-radius:20px; padding:4px 12px; white-space:nowrap; }
-.q-counter.over .q-count-badge { border-color:#E8BDBD; }
-
-.q-group-head { display:flex; align-items:center; gap:8px; margin:22px 0 10px; padding-top:18px;
-  border-top:1px solid var(--border); font-size:12px; font-weight:500; letter-spacing:.06em;
-  color:var(--ink-sub); text-transform:uppercase; }
-.q-group-head:first-child { margin-top:0; padding-top:0; border-top:0; }
-.q-group-head .q-group-tag { font-size:10.5px; font-weight:500; letter-spacing:.04em;
-  padding:3px 9px; border-radius:20px; text-transform:none; }
-.q-group-tag.must { background:#FDF2F2; color:var(--rose); border:1px solid #E8BDBD; }
-.q-group-tag.pick { background:var(--mint-bg); color:var(--mint-dk); border:1px solid var(--mint-bd); }
-
-.q-item { border:1.5px solid var(--border); border-radius:var(--r-md);
-  padding:14px 15px 13px; margin-bottom:10px; background:#FFF;
-  transition:border-color .15s, background .15s; }
-.q-item.filled { border-color:var(--mint-bd); background:var(--mint-bg); }
-.q-item.req { border-color:#E8BDBD; }
-.q-item.req.filled { border-color:var(--mint-bd); }
-
-.q-head { display:flex; gap:9px; align-items:flex-start; margin-bottom:9px; }
-.q-no { flex:none; min-width:30px; height:22px; padding:0 7px;
-  display:flex; align-items:center; justify-content:center;
-  font-family:'Plus Jakarta Sans',sans-serif; font-size:11.5px; font-weight:400;
-  color:var(--ink-mid); background:var(--off);
-  border:1px solid var(--border); border-radius:20px; }
-.q-item.filled .q-no { color:var(--mint-dk); background:#FFF; border-color:var(--mint-bd); }
-.q-item.req .q-no { color:var(--rose); background:#FDF2F2; border-color:#E8BDBD; }
-.q-text { font-size:13.5px; font-weight:400; color:var(--ink); line-height:1.65; }
-.q-text .q-eg { display:block; margin-top:4px; font-size:12px; font-weight:400; color:var(--ink-sub); line-height:1.6; }
-.q-note { display:inline-block; margin-top:5px; font-size:11px; font-weight:400; color:var(--mint-dk);
-  background:var(--mint-lt); border:1px solid var(--mint-bd); border-radius:20px; padding:2px 9px; }
-.q-answer { width:100%; font-family:var(--sans); font-size:13px; font-weight:300;
-  color:var(--ink); background:var(--off); border:1.5px solid var(--border); border-radius:var(--r-sm);
-  padding:10px 12px; outline:none; resize:vertical; line-height:1.7; -webkit-appearance:none; }
-.q-answer:focus { border-color:var(--mint-bd); background:#FFF; }
-.q-item.filled .q-answer { background:#FFF; }
-
-/* ── 질문 자유 작성 안내 ── */
-.q-free { border:1px solid var(--border); border-radius:var(--r-md); background:var(--off);
-  padding:15px 17px 16px; margin-bottom:14px; }
-.q-free-head { font-size:14px; font-weight:400; color:var(--black);
-  line-height:1.5; margin-bottom:8px; letter-spacing:-.2px; }
-.q-free-head strong { font-weight:500; }
-.q-free-body { font-size:13px; font-weight:400; color:var(--ink-sub); line-height:1.85; }
-.q-free-body strong { font-weight:500; color:var(--black); }
-.q-free-em { display:inline-block; margin-top:9px; font-size:12.5px; font-weight:500; color:var(--mint-dk); }
-
-/* ── 사진 일괄 업로드 ── */
-.photo-bulk { display:flex; align-items:center; gap:10px; width:100%; margin-bottom:10px;
-  padding:13px 15px; background:var(--mint-bg); border:1.5px dashed var(--mint-bd);
-  border-radius:var(--r-md); cursor:pointer; font-family:var(--sans); font-size:13px;
-  font-weight:500; color:var(--mint-dk); text-align:left; transition:all .15s;
-  -webkit-tap-highlight-color:transparent; }
-.photo-bulk:hover { background:var(--mint-lt); border-color:var(--mint-dk); }
-.photo-bulk-icon { flex:none; font-size:17px; line-height:1; }
-.photo-bulk-sub { display:block; margin-top:2px; font-size:11.5px; font-weight:400; color:var(--ink-sub); }
-.photo-drop { position:relative; border-radius:var(--r-md); transition:background .15s; }
-.photo-drop.dragover { background:var(--mint-lt); outline:2px dashed var(--mint-dk); outline-offset:5px; }
-.photo-drop.dragover::after { content:'여기에 놓으면 빈 칸부터 채워져요';
-  position:absolute; inset:0; display:flex; align-items:center; justify-content:center;
-  background:rgba(241,247,244,.93); border-radius:var(--r-md);
-  font-size:13px; font-weight:500; color:var(--mint-dk); pointer-events:none; z-index:2; }
-
-/* ── 제품 개발 동의 ── */
-.consent-card { position:relative; border:2px solid var(--mint-bd); border-radius:var(--r-lg);
-  background:var(--mint-bg); padding:0; margin:8px 0 12px; overflow:hidden;
-  transition:border-color .2s, background .2s; }
-.consent-card.agreed { border-color:var(--mint-dk); background:#FFFFFF; }
-.consent-card.warn { border-color:var(--rose); background:#FDF2F2; animation:consentShake .4s; }
-@keyframes consentShake { 0%,100%{transform:translateX(0)} 25%{transform:translateX(-5px)} 75%{transform:translateX(5px)} }
-.consent-ribbon { display:flex; align-items:center; gap:7px; background:var(--mint-dk); color:#FFF;
-  padding:9px 18px; font-size:12px; font-weight:500; letter-spacing:.02em; }
-.consent-card.warn .consent-ribbon { background:var(--rose); }
-.consent-ribbon .req-star { margin-left:auto; font-size:11px; opacity:.9; font-weight:400; }
-.consent-body { padding:18px 20px 20px; }
-.consent-title { font-size:16px; font-weight:500; color:var(--black); line-height:1.5;
-  margin-bottom:10px; letter-spacing:-.2px; }
-.consent-sub { font-size:13px; color:var(--ink-sub); line-height:1.85; font-weight:400; }
-.consent-sub strong { font-weight:500; color:var(--black); }
-.consent-gift { display:flex; gap:9px; align-items:flex-start; margin:13px 0 4px; padding:12px 14px;
-  background:#FFF; border:1.5px solid var(--mint-bd); border-radius:var(--r-sm);
-  font-size:12.5px; font-weight:400; color:var(--mint-dk); line-height:1.7; }
-.consent-card.agreed .consent-gift { background:var(--mint-bg); }
-.consent-gift-icon { flex:none; font-size:16px; line-height:1.4; }
-.consent-fine { margin-top:10px; font-size:11.5px; color:var(--ink-sub); font-weight:400; }
-.consent-action { display:flex; align-items:center; justify-content:space-between; gap:14px;
-  margin-top:16px; padding:14px 16px; background:#FFF; border:1.5px solid var(--border);
-  border-radius:var(--r-md); cursor:pointer; user-select:none;
-  -webkit-tap-highlight-color:transparent; transition:all .18s; }
-.consent-action:hover { border-color:var(--mint-bd); }
-.consent-card.agreed .consent-action { border-color:var(--mint-dk); background:var(--mint-bg); }
-.consent-action-text { font-size:14px; font-weight:500; color:var(--ink-mid); transition:color .18s; }
-.consent-card.agreed .consent-action-text { color:var(--mint-dk); }
-.consent-action-text .sub { display:block; margin-top:3px; font-size:12px; font-weight:400; color:var(--ink-sub); }
-.consent-card.agreed .consent-action-text .sub { font-size:14px; font-weight:500; color:var(--mint-dk); opacity:1; letter-spacing:-.2px; }
-.toggle-lg { width:56px; height:31px; margin-top:0; }
-.toggle-lg .toggle-track { border-radius:16px; }
-.toggle-lg input:checked + .toggle-track { background:var(--mint-dk); }
-.toggle-lg .toggle-thumb { top:4px; left:4px; width:23px; height:23px; }
-.toggle-lg input:checked ~ .toggle-thumb { transform:translateX(25px); }
-
 </style>
 </head>
 <body>
@@ -362,7 +259,7 @@ input::placeholder, textarea::placeholder { color: var(--ink-ph); font-weight: 3
 <div class="progress-wrap">
   <div class="progress-row">
     <span class="progress-brand">moreen</span>
-    <span class="progress-status" id="prog-status">wedding love story</span>
+    <span class="progress-status" id="prog-status">story form</span>
   </div>
   <div class="progress-track"><div class="progress-fill" id="prog-fill"></div></div>
 </div>
@@ -382,9 +279,9 @@ input::placeholder, textarea::placeholder { color: var(--ink-ph); font-weight: 3
 
   <!-- COVER -->
   <div class="cover">
-    <div class="cover-eyebrow">moreen · wedding love story · A3</div>
+    <div class="cover-eyebrow">moreen · story form</div>
     <div class="cover-title" style="font-family:'Courier New',Courier,monospace; font-size:18px; font-weight:700; letter-spacing:4px; margin-bottom:10px;">The Days We Create</div>
-    <div class="cover-title" style="font-size:22px; font-weight:300; margin-bottom:18px;">처음 만난 날부터,<br>우리가 하나가 되기까지.</div>
+    <div class="cover-title" style="font-size:22px; font-weight:300; margin-bottom:18px;">두 분이 만들어 가고 있는<br>이야기를 들려주세요.</div>
     <div class="cover-sub">어렵게 생각하지 마세요.<br><strong>친한 친구에게 얘기하듯</strong> 편하게 적어주시면 돼요.</div>
     <div class="cover-badge">확인후 궁금한 내용은 추가 문의드리니 걱정마세요.</div>
   </div>
@@ -397,10 +294,10 @@ input::placeholder, textarea::placeholder { color: var(--ink-ph); font-weight: 3
 
   <div class="req-note"><span style="color:var(--rose);font-size:20px;line-height:1;vertical-align:middle;">*</span> 표시 항목은 필수예요</div>
 
-  <!-- A -->
+  <!-- 01 -->
   <div class="section">
     <div class="section-head">
-      <span class="section-num">A</span>
+      <span class="section-num">01</span>
       <span class="section-title">두 분을 알려주세요</span>
     </div>
   </div>
@@ -411,96 +308,100 @@ input::placeholder, textarea::placeholder { color: var(--ink-ph); font-weight: 3
       <div class="hint"><strong>영문이름</strong>과 <strong>MBTI</strong>(선택)을 써주세요</div>
       <div class="hint" style="margin-top:-8px; color:var(--ink-mid); font-size:11.5px;">*MBTI는 성향 참고용이에요. 디자인에는 안 들어가요 ^-^</div>
       <div class="input-row">
-        <input type="text" id="name1" placeholder="예: Hannah / INFP" oninput="prog()">
-        <input type="text" id="name2" placeholder="예: Gwani / ENFP" oninput="prog()">
+        <input type="text" id="name1" placeholder="예: Hannah / INFP" oninput="prog()" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" data-lpignore="true" data-form-type="other">
+        <input type="text" id="name2" placeholder="예: Gwani / ENFP" oninput="prog()" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" data-lpignore="true" data-form-type="other">
       </div>
     </div>
     <div class="card">
       <div class="label">처음 만난 날 <span class="req">*</span></div>
       <div class="hint">정확한 날짜가 생각 안 나면 <strong>연도나 계절만</strong> 적어도 괜찮아요</div>
-      <input type="text" id="met" placeholder="예: 2021년 봄, 2022.03" oninput="prog()">
+      <input type="text" id="met" placeholder="예: 2021년 봄, 2022.03" oninput="prog()" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" data-lpignore="true" data-form-type="other">
     </div>
   </div>
 
-  <!-- B -->
+  <!-- 02 -->
   <div class="section">
     <div class="section-head">
-      <span class="section-num">B</span>
+      <span class="section-num">02</span>
       <span class="section-title">커플 이야기를 들려주세요</span>
     </div>
   </div>
   <hr class="section-divider" style="margin-left:26px;margin-right:26px;">
   <div style="padding:0 26px;">
 
-    <!-- 상품 안내 (A3 고정) -->
-    <div class="notice" style="border-color:var(--mint-bd);background:var(--mint-bg);">
-      <strong>A3 · 웨딩 러브스토리 액자</strong><br>
-      <span style="font-weight:400;">처음 만난 날부터 결혼까지, <em>10장면</em>을 한 장에 담아드려요.</span>
+    <!-- 스토리 타입 -->
+    <div class="card">
+      <div class="label">스토리 타입 <span class="req">*</span></div>
+      <div class="hint">하나만 골라주세요</div>
+      <div class="type-grid">
+        <div class="type-card" id="t-tl" onclick="pickType('tl')">
+          <span class="type-card-icon">◎</span>
+          <div class="type-card-name">Timeline</div>
+          <div class="type-card-desc">처음 만남부터 지금까지 시간 흐름으로</div>
+        </div>
+        <div class="type-card" id="t-col" onclick="pickType('col')">
+          <span class="type-card-icon">◈</span>
+          <div class="type-card-name">Collection</div>
+          <div class="type-card-desc">기억나는 순간들을 에피소드 중심으로</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 상품 선택 -->
+    <div class="card">
+      <div class="label">상품 선택 <span class="req">*</span></div>
+      <div class="hint"><strong>장면 수</strong> = 그림에 담기는 에피소드 수예요</div>
+      <div class="size-list">
+        <div class="size-card" id="s-b" onclick="pickSize('b')">
+          <div class="size-left"><div class="radio"><div class="radio-inner"></div></div><div><div class="size-name">베이직</div></div></div>
+          <div class="size-price">4–6장면 · A4</div>
+        </div>
+        <div class="size-card" id="s-s" onclick="pickSize('s')">
+          <div class="size-left"><div class="radio"><div class="radio-inner"></div></div><div><div class="size-name">시그니처</div></div></div>
+          <div class="size-price">8–11장면 · A3</div>
+        </div>
+        <div class="size-card" id="s-p" onclick="pickSize('p')">
+          <div class="size-left"><div class="radio"><div class="radio-inner"></div></div><div><div class="size-name">프리미엄</div></div></div>
+          <div class="size-price">12–15장면 · A2</div>
+        </div>
+      </div>
     </div>
 
     <!-- 우리 이야기 -->
     <div class="notice">
-      <strong>아래 &lsquo;우리 커플 소개&rsquo;와 &lsquo;장면 구성&rsquo;은 역할이 달라요.</strong><br>
-      <span style="font-weight:400;"><em>우리 커플 소개</em>에서 먼저 두 분이 어떤 커플인지
-      전체적인 이미지를 말씀해주시고,<br>
-      그다음 <em>장면 구성</em>에서는 순간 순간을 하나씩 여쭤볼 거예요.</span>
+      <strong>이 파트가 가장 중요해요. 함께하는 두 분을 상징하는 일상이나<br>에피소드를 처음 듣는 저도 그 장면이 연상되도록 적어주세요.</strong>
     </div>
     <div class="card">
-      <div class="label">우리 커플 소개 <span class="req">*</span> <span class="section-opt">두분 인스타그램계정 남겨주셔도 좋아요</span></div>
+      <div class="label">우리 이야기 <span class="req">*</span> <span class="section-opt">두분 인스타그램계정 남겨주셔도 좋아요</span></div>
       <div class="hint">
-        <strong>처음 두 분을 소개한다고 생각하고 편하게 적어주세요.</strong><br><br>
-        디자이너가 <strong>두 분이 어떤 사이인지 먼저 알고</strong> 아래 장면들을 읽으면,
-        같은 이야기라도 훨씬 깊이 이해하고 그릴 수 있어요.
-        <span style="display:block;margin-top:8px;color:var(--ink-sub);">
-        · 어떻게 만나 지금까지 왔는지 (한두 줄이면 충분해요)<br>
-        · 두 분의 성격과 분위기, 서로를 부르는 호칭<br>
-        · 함께 사는 반려동물, 아이, 사는 곳 같은 배경<br>
-        · 주변에서 두 분을 어떤 커플이라고 하는지
-        </span>
-        <span style="display:block;margin-top:10px;padding:9px 12px;background:var(--off);border-radius:var(--r-sm);font-size:11.5px;color:var(--ink-sub);">
-        구체적인 장면·에피소드는 <strong>다음 칸(장면 구성)</strong>에서 여쭤볼게요.
-        여기서는 <strong>전체 그림</strong>만 그려주시면 돼요.
-        </span>
-        <br>
-        <em>예: "대학 동아리에서 만나 8년째예요. 둘 다 집순이라 주말엔 주로 집에 있고,
-        저는 계획형·그는 즉흥형이라 늘 티격태격하는데 그게 저희 재미예요.
-        고양이 두 마리와 살고, 친구들은 저희를 '노부부 같다'고 해요."</em>
+        <strong>어떻게 만났는지, 본 커플만의 개성이 느껴지는<br>두 분의 관계에 대해 자유롭게 적어주세요.</strong><br><br>
+        <em>예: "친구 소개로 만났고, 첫 데이트는 성수동이었어요.<br>둘 다 강아지를 키워서 강아지 이야기로 가까워졌어요."</em>
       </div>
-      <textarea id="story" rows="6" placeholder="두 분을 처음 소개한다고 생각하고 편하게 적어주세요" oninput="prog()"></textarea>
+      <textarea id="story" rows="5" placeholder="친한 친구한테 얘기하듯 편하게 적어주세요" oninput="prog()" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" data-lpignore="true" data-form-type="other"></textarea>
     </div>
 
     <!-- 장면 구성 -->
     <div class="card" id="scene-card">
-      <div class="label">장면 구성 <span class="req">*</span></div>
+      <div class="label">장면 구성 <span class="section-opt">선택한 상품의 장면 수에 맞춰 써주세요</span></div>
       <div class="hint">
-        <strong>질문 하나가 그림 한 장면이 됩니다.</strong><br>
-        아래 질문을 읽고 <strong>바로 밑 칸에 답</strong>을 적어주세요.<br><br>
-        <em>처음 듣는 사람도 그 장면이 눈에 그려지도록 적어주시면 가장 좋아요.</em>
+        <strong>액자에 담겼으면 하는 에피소드를 적어주세요.</strong><br><br>
+        <strong>첫 만난 날의 기억은 1번에 필수로 적어주세요.<br>
+        그날 입었던 옷스타일, 첫인상, 특징적인 장면을 적어주세요.</strong>
       </div>
-      <div class="q-free">
-        <div class="q-free-head">질문은 이야기를 꺼내기 위한 <strong>가이드예요</strong></div>
-        <div class="q-free-body">
-          꼭 질문에 맞춰 답하지 않으셔도 괜찮아요.<br>
-          <strong>담고 싶은 장면이 따로 있다면</strong> 질문 상관없이
-          답변박스에 원하는 장면을 적어주세요.<br>
-          <span class="q-free-em">질문에 답하든, 직접 쓰시든 — 한 칸이 한 장면이 됩니다.</span>
-        </div>
+      <div class="hint">
+        <em>예: "야구장가서 오렌지색봉다리 머리에 달고 치킨먹으며 롯데팀 응원하는 장면 / 캠핑가서 불멍하며 마주보고 앉아 이야기하는 장면"</em>
       </div>
       <div id="scene-guide" style="font-size:12px;color:var(--mint-dk);background:var(--mint-bg);border:1px solid var(--mint-bd);border-radius:var(--r-sm);padding:10px 14px;margin-bottom:12px;">
-        <strong>위에서 상품을 먼저 선택하면</strong> 질문이 나타나요 😊
+        <strong>위에서 상품을 먼저 선택하면</strong> 장면 칸이 자동으로 만들어져요 😊
       </div>
-      <div class="q-counter" id="q-counter" style="display:none;">
-        <span id="q-counter-text"></span>
-        <span class="q-count-badge" id="q-counter-badge">0</span>
-      </div>
-      <div id="scenes"></div>
+      <div class="scene-list" id="scenes"></div>
     </div>
   </div>
 
-  <!-- C -->
+  <!-- 03 -->
   <div class="section">
     <div class="section-head">
-      <span class="section-num">C</span>
+      <span class="section-num">03</span>
       <span class="section-title">사진을 올려주세요</span>
     </div>
   </div>
@@ -527,18 +428,10 @@ input::placeholder, textarea::placeholder { color: var(--ink-ph); font-weight: 3
         <strong>각자 나답게 나온 사진 2–3장 + 커플 사진 1–2장</strong><br>
         <strong>*평소 두 분의 즐겨입는 옷스타일, 헤어스타일을 알 수 있으면 좋아요.</strong><br>
         *전신컷과 클로즈업컷을 함께 보여주시면 더 좋아요.<br>
-        *<strong>여러 장을 한번에</strong> 고르거나 끌어다 놓을 수 있어요.<br>
+        *각 칸을 탭하면 사진을 올릴 수 있어요.<br>
         *올린 사진을 탭하면 크게 볼 수 있어요.
       </div>
-      <button type="button" class="photo-bulk" onclick="bulkUpload('photo')">
-        <span class="photo-bulk-icon">🖼</span>
-        <span>여러 장 한번에 올리기
-          <span class="photo-bulk-sub">파일 선택창에서 여러 장을 한번에 고르세요 · 아래 영역에 끌어다 놓아도 돼요</span>
-        </span>
-      </button>
-      <div class="photo-drop" id="drop-photo">
-        <div id="photo-slots" class="preview-wrap"></div>
-      </div>
+      <div id="photo-slots" class="preview-wrap"></div>
       <input type="file" id="f-photo" multiple accept="image/*" style="display:none" onchange="prevPhoto(this,'photo')">
     </div>
     <div class="card">
@@ -546,27 +439,55 @@ input::placeholder, textarea::placeholder { color: var(--ink-ph); font-weight: 3
       <div class="hint">
         <strong>위에 작성한 장면의 일러스트를 개발할 때 참고할 수 있는 사진</strong><br>
         *사진을 모두 안 채우셔도 괜찮아요.<br>
-        *<strong>여러 장을 한번에</strong> 고르거나 끌어다 놓을 수 있어요.<br>
+        *각 칸을 탭하면 사진을 올릴 수 있어요.<br>
         *올린 사진을 탭하면 크게 볼 수 있어요.
       </div>
-      <div id="scene-photo-guide" style="display:none;"></div>
-      <button type="button" class="photo-bulk" onclick="bulkUpload('scene')">
-        <span class="photo-bulk-icon">🖼</span>
-        <span>여러 장 한번에 올리기
-          <span class="photo-bulk-sub">파일 선택창에서 여러 장을 한번에 고르세요 · 아래 영역에 끌어다 놓아도 돼요</span>
-        </span>
-      </button>
-      <div class="photo-drop" id="drop-scene">
-        <div id="scene-slots" class="preview-wrap"></div>
+      <div id="scene-photo-guide" style="font-size:12px;color:var(--mint-dk);background:var(--mint-bg);border:1px solid var(--mint-bd);border-radius:var(--r-sm);padding:10px 14px;margin-bottom:8px;">
+        <strong>위에서 상품을 먼저 선택하면</strong> 사진 슬롯이 자동으로 만들어져요 😊
       </div>
+      <div id="scene-slots" class="preview-wrap"></div>
       <input type="file" id="f-scene" multiple accept="image/*" style="display:none" onchange="prevPhoto(this,'scene')">
+    </div>
+  </div>
+
+  <!-- 04 -->
+  <div class="section">
+    <div class="section-head">
+      <span class="section-num">04</span>
+      <span class="section-title">분위기 <span class="section-opt">선택</span></span>
+    </div>
+  </div>
+  <hr class="section-divider" style="margin-left:26px;margin-right:26px;">
+  <div style="padding:0 26px;">
+    <div class="card">
+      <div class="label">전체 느낌</div>
+      <div class="hint">1–2개만 골라주세요. 기본 룩은 샘플과 같지만, 선호하시는 느낌을 참고할게요.</div>
+      <div class="chip-group">
+        <div class="chip" onclick="tog(this,'mood')">따뜻한</div>
+        <div class="chip" onclick="tog(this,'mood')">차분한</div>
+        <div class="chip" onclick="tog(this,'mood')">밝은</div>
+        <div class="chip" onclick="tog(this,'mood')">미니멀</div>
+        <div class="chip" onclick="tog(this,'mood')">감성적인</div>
+        <div class="chip" onclick="tog(this,'mood')">재미있는, 웃긴</div>
+      </div>
+    </div>
+    <div class="card">
+      <div class="label">텍스트 포함</div>
+      <div class="hint"><strong>메인 타이틀(The Days We Create)과 이름</strong>은 필수로 포함 해드려요</div>
+      <div class="chip-group">
+        <div class="chip" onclick="tog(this,'txt',1)">메인 타이틀과 이름만</div>
+        <div class="chip" onclick="tog(this,'txt',1)">+ 날짜 포함</div>
+        <div class="chip" onclick="tog(this,'txt',1)">+ 짧은 문장 포함</div>
+        <div class="chip" onclick="tog(this,'txt',1)">+ 날짜, 짧은 문장 포함</div>
+        <div class="chip" onclick="tog(this,'txt',1)">작가에게 맡길게요</div>
+      </div>
     </div>
   </div>
 
   <!-- 05 -->
   <div class="section">
     <div class="section-head">
-      <span class="section-num">D</span>
+      <span class="section-num">05</span>
       <span class="section-title">마지막으로</span>
     </div>
   </div>
@@ -575,41 +496,25 @@ input::placeholder, textarea::placeholder { color: var(--ink-ph); font-weight: 3
     <div class="card">
       <div class="label">작가에게 하고 싶은 말 <span class="section-opt">선택</span></div>
 
-      <textarea id="msg" rows="3" placeholder="어떤 말이든 편하게 적어주세요"></textarea>
+      <textarea id="msg" rows="3" placeholder="어떤 말이든 편하게 적어주세요" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" data-lpignore="true" data-form-type="other"></textarea>
     </div>
     <div class="card">
       <div class="label">카카오톡 아이디 <span class="req">*</span></div>
       <div class="hint">스토리 문의 및 <strong>디자인 확인</strong>용으로 사용해요</div>
-      <input type="text" id="kakao" placeholder="카카오톡 ID" oninput="prog()">
+      <input type="text" id="kakao" placeholder="카카오톡 ID" oninput="prog()" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" data-lpignore="true" data-form-type="other">
       <div class="gap8"></div>
-      <input type="tel" id="phone" placeholder="전화번호">
+      <input type="tel" id="phone" placeholder="전화번호" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" data-lpignore="true" data-form-type="other">
     </div>
-    <div class="consent-card" id="consent-card">
-      <div class="consent-ribbon">
-        <span>꼭 확인해 주세요</span>
-        <span class="req-star">필수 항목 *</span>
-      </div>
-      <div class="consent-body">
-        <div class="consent-title">두 분의 일러스트를<br>모린 제품으로 만들어도 될까요?</div>
-        <div class="consent-sub">
-          두 분의 이야기로 그린 일러스트를 <strong>엽서 · 디자인문구 · 소품</strong> 등
-          모린 제품에 담을 수 있어요.
+    <div class="consent-card">
+      <div class="consent-row">
+        <div>
+          <div class="consent-title">본 일러스트 적용한 제품 개발 동의 <span style="color:#e53935; font-size:14px; vertical-align:middle;">*</span></div>
+          <div class="consent-sub">고객님의 스토리 일러스트는 모린에서 제작하는 엽서, 디자인문구 또는 소품 등에 적용할 예정입니다. 동의해 주신 분께는 제품이 출시할 경우, 선물로 보내드립니다.<br>이름은 표기되지 않습니다.</div>
         </div>
-        <div class="consent-gift">
-          <span class="consent-gift-icon">🎁</span>
-          <span>동의해 주시면, <strong>제품이 출시될 때 완성품을 선물로 보내드려요.</strong></span>
-        </div>
-        <div class="consent-fine">* 두 분의 이름이나 개인정보는 제품 어디에도 표기되지 않습니다.</div>
-        <label class="consent-action" for="consent">
-          <span class="consent-action-text" id="consent-label">
-            네, 동의합니다
-            <span class="sub">탭해서 켜주세요</span>
-          </span>
-          <div class="toggle toggle-lg" style="pointer-events:none;">
-            <input type="checkbox" id="consent" onchange="onConsent(this)">
-            <div class="toggle-track"></div>
-            <div class="toggle-thumb"></div>
-          </div>
+        <label class="toggle">
+          <input type="checkbox" id="consent">
+          <div class="toggle-track"></div>
+          <div class="toggle-thumb"></div>
         </label>
       </div>
     </div>
@@ -628,7 +533,7 @@ input::placeholder, textarea::placeholder { color: var(--ink-ph); font-weight: 3
     ">
       <div style="font-size:13px; font-weight:500; color:var(--black); margin-bottom:4px;">📱 다른 기기에서 이어서 작성하고 싶어요</div>
       <div style="font-size:12px; font-weight:500; color:var(--black); margin-bottom:8px;">*사진은 최종 제출 할 기기에서 업로드</div>
-      <div style="font-size:12px; color:var(--ink-sub); margin-bottom:12px; font-weight:400; line-height:1.7;">
+      <div style="font-size:12px; color:var(--ink-mid); margin-bottom:12px; font-weight:300; line-height:1.7;">
         아래 버튼을 탭해서 링크를 복사한 뒤<br>카카오톡으로 본인에게 보내세요.<br>그 링크를 열면 지금까지 작성한 내용이 그대로 이어져요.
       </div>
       <button onclick="shareResumeLink()" style="
@@ -645,83 +550,44 @@ input::placeholder, textarea::placeholder { color: var(--ink-ph); font-weight: 3
     <div class="submit-section">
       <div class="submit-title">다 적으셨나요?</div>
       <div class="submit-sub">제출 후 <strong>영업일 1일 이내</strong>에<br>카카오톡으로 연락드릴게요.</div>
-      <button class="submit-btn" id="sub-btn" onclick="doSubmit()">Wedding Story 제출하기 →</button>
+      <button class="submit-btn" id="sub-btn" onclick="doSubmit()">Love Story 제출하기 →</button>
       <div style="margin-top:14px; font-size:12.5px; font-weight:500; color:var(--black); line-height:1.8; text-align:left;">
         <strong>*제출 후 사진 전송으로 인해 1~2분 소요될 수 있어요.<br>오류가 아니니 완료 화면이 나타날 때까지 화면을 닫지 말아주세요.</strong>
       </div>
-    </div><!-- //submit-section -->
-  </div><!-- //submit-wrap -->
 
-</div><!-- //form-outer -->
-</div><!-- //main -->
+</div>
+</div>
 
 <script>
 /* ━━━ 상태 변수 ━━━ */
-let selSize = 's';
-
-const QUESTIONS = [
-  { id:'1-1', req:true, t:'처음 만난 날 입고 있던 옷과 머리스타일 등에 대해 설명해주세요.',
-    eg:'첫 장면이 됩니다 — 그날의 두 분 모습이 그려지도록 적어주세요',
-    ph:'예: 그는 회색 후드에 검은 뿔테, 저는 청바지에 흰 셔츠였어요. 머리는 어깨까지 오는 단발.' },
-  { id:'1-2', req:true, t:'첫 만남에서 나눈 인상적인 대화내용을 적어주세요.',
-    ph:'예: "강아지 키우세요?" 한마디로 두 시간을 떠들었어요.' },
-  { id:'2',   req:true, t:'두 사람이 서로에게 특별한 사람이 된 날의 이야기를 해주세요.',
-    eg:'고백했던 날도 좋고, 사귀기로 한 날의 이야기, 또는 연인이 된 계기가 된 사건 등',
-    ph:'예: 한강에서 자전거 타다가 비를 쫄딱 맞고, 편의점 앞에서 고백했어요.' },
-  { id:'3',   req:true, t:'두 사람의 성격과 관계가 드러나는 에피소드를 하나 들려주세요.',
-    eg:'커플 캐릭터 — 두 분이 어떤 커플인지 한 장면으로 보여주는 이야기',
-    ph:'예: 저는 계획형·그는 즉흥형이라, 여행 전날 밤 저는 엑셀을 짜고 그는 짐도 안 쌌어요.' },
-  { id:'4',   req:true, t:'두 분의 데이트 루틴 하나를 알려주세요.',
-    eg:'만나면 늘 하던 것 · 자주 가던 장소 (첫 번째)',
-    ph:'예: 매주 토요일 성수동에서 만나 카페 한 곳씩 도장깨기를 했어요.' },
-  { id:'5',   req:true, t:'또 다른 데이트 루틴이 있다면 알려주세요.',
-    eg:'데이트 루틴 (두 번째) — 4번내용과 다른 결의 장면이면 더 좋아요',
-    ph:'예: 밤에 만나면 한강 편의점에서 라면 끓여 먹으며 이야기했어요.' },
-  { id:'6',   req:true, t:'두 사람이 함께하는 취미가 있다면 적어주세요.',
-    eg:'같이 배웠거나, 함께 빠져 있는 것',
-    ph:'예: 둘 다 클라이밍에 빠져서 주 2회 암장에 가요.' },
-  { id:'7',   req:true, t:'둘이 함께 즐기는 활동이나 자주 하는 일을 적어주세요.',
-    eg:'취미와는 다른 결의 활동 · 계절마다 하는 일도 좋아요',
-    ph:'예: 봄이면 벚꽃 아래 돗자리 펴고 김밥을 먹어요.' },
-  { id:'8',   req:true, t:'함께 떠난 여행 중 가장 기억에 남는 장면을 설명해주세요.',
-    eg:'여행지, 그날의 날씨, 두 분이 무엇을 하고 있었는지',
-    ph:'예: 제주 해안도로에서 스쿠터 타다 노을 앞에 멈춰 한참을 봤어요.' },
-  { id:'9',   req:true, t:'프로포즈 이야기를 들려주세요.',
-    eg:'장소, 그날의 분위기, 어떤 말을 했는지',
-    ph:'예: 남산 케이블카 안에서 반지를 꺼냈는데 손이 떨려 놓칠 뻔했어요.' },
-  { id:'10',  req:true, t:'두 사람에게 상징적인 물건이나 선물이 있다면 알려주세요.',
-    eg:'커플링, 처음 받은 선물, 함께 고른 물건, 반려동물 등 — 그림 안에 함께 담아드려요',
-    ph:'예: 첫 기념일에 주고받은 손목시계를 지금도 둘 다 차고 다녀요.' },
-];
-
-const PICK_N = 0;   /* 웨딩 A3 : 11문항 모두 필수 (선택 문항 없음) */
-
-const COUNTER_TEXT = (n, total) => n >= total
-  ? `<strong>${total}문항 모두 작성 완료!</strong> 이제 사진만 올려주시면 돼요.`
-  : `A3 · 10장면 — <strong>아래 ${total}문항을 모두</strong> 적어주세요. (${total - n}문항 남았어요)`;
-const NO_SLOT_MSG = '사진 슬롯을 불러오는 중이에요. 잠시 후 다시 시도해주세요.';
+let selType = '', selSize = '', sceneN = 3;
 const photoStore = { photo: [], scene: [] };
 
 /* ━━━ Google Sheets ━━━ */
 const SHEET_URL = 'https://script.google.com/macros/s/AKfycby1Z3Lzs2PwbBVumDwbXqpsg9tUpIexwCdxgJRx8oGRf25gL0-XS1o2V1TiZNN2JvpJzA/exec';
-let currentId = localStorage.getItem('moreen_wedding_sid') || (() => {
+let currentId = localStorage.getItem('moreen_session_id') || (() => {
   const id = 'tmp_' + Date.now() + '_' + Math.random().toString(36).slice(2,7);
-  localStorage.setItem('moreen_wedding_sid', id);
+  localStorage.setItem('moreen_session_id', id);
   return id;
 })();
 let saveTimer = null;
 
 async function saveToSheets(status = '임시저장') {
   try {
+    const scenesRaw = Array.from(document.querySelectorAll('#scenes textarea')).map(i => i.value).filter(Boolean);
+    const scenes  = scenesRaw.map((s, i) => `${i+1}. ${s}`).join('\n');
+    const chips   = Array.from(document.querySelectorAll('.chip.active')).map(c => c.textContent.trim()).join(', ');
+    const sizeMap = { b:'베이직(A4)', s:'시그니처(A3)', p:'프리미엄(A2)' };
     const data = {
       id: currentId, 상태: status,
       제출시간: new Date().toLocaleString('ko-KR'),
       'Person 1': document.getElementById('name1')?.value || '',
       'Person 2': document.getElementById('name2')?.value || '',
       '만난 날': document.getElementById('met')?.value || '',
-      상품: 'A3(10장면) · 웨딩',
+      유형: selType === 'tl' ? 'Timeline' : selType === 'col' ? 'Collection' : '',
+      상품: sizeMap[selSize] || '',
       이야기: document.getElementById('story')?.value || '',
-      장면: collectAnswers(),
+      장면: scenes, 분위기: chips,
       메시지: document.getElementById('msg')?.value || '',
       카카오: document.getElementById('kakao')?.value || '',
       전화: document.getElementById('phone')?.value || '',
@@ -755,8 +621,24 @@ async function loadFromSheets(id) {
     set('msg',   d['메시지']);   set('kakao', d['카카오']);
     set('phone', d['전화']);
 
-    pickSize('s');
-    setAnswers(d['장면']);
+    if (d['유형'] === 'Timeline')   pickType('tl');
+    if (d['유형'] === 'Collection') pickType('col');
+
+    const sizeRev = { '베이직(A4)':'b', '시그니처(A3)':'s', '프리미엄(A2)':'p' };
+    if (sizeRev[d['상품']]) pickSize(sizeRev[d['상품']]);
+
+    if (d['장면']) {
+      const sceneVals = d['장면'].split('\n').map(s => s.replace(/^\d+\.\s*/, ''));
+      const inputs = document.querySelectorAll('#scenes textarea');
+      sceneVals.forEach((val, i) => { if (i < inputs.length) inputs[i].value = val; });
+    }
+
+    if (d['분위기']) {
+      const chips = d['분위기'].split(', ');
+      document.querySelectorAll('.chip').forEach(chip => {
+        if (chips.includes(chip.textContent.trim())) chip.classList.add('active');
+      });
+    }
 
     if (bar) {
       msg.textContent = `✓ ${d['제출시간'] ? d['제출시간'] + '에 저장된 내용이에요' : '이전에 작성한 내용이에요'} — 이어서 작성하세요`;
@@ -768,12 +650,11 @@ async function loadFromSheets(id) {
 }
 
 /* ━━━ 로컬 저장 ━━━ */
-const SAVE_KEY = 'moreen_wedding_form_v1';
+const SAVE_KEY = 'moreen_form_v1';
 function saveToLocal() {
-  const answers = {};
-  document.querySelectorAll('#scenes .q-answer').forEach(t => {
-    if (t.value.trim()) answers[t.dataset.qid] = t.value;
-  });
+  const scenesRaw = Array.from(document.querySelectorAll('#scenes textarea')).map(i => i.value);
+  const scenes = scenesRaw.map((s, i) => s ? `${i+1}. ${s}` : '').filter(Boolean);
+  const chips  = Array.from(document.querySelectorAll('.chip.active')).map(c => c.textContent.trim());
   const data = {
     name1: document.getElementById('name1')?.value || '',
     name2: document.getElementById('name2')?.value || '',
@@ -782,7 +663,7 @@ function saveToLocal() {
     msg:   document.getElementById('msg')?.value   || '',
     kakao: document.getElementById('kakao')?.value || '',
     phone: document.getElementById('phone')?.value || '',
-    selSize, answers,
+    selType, selSize, scenes, chips,
     savedAt: new Date().toLocaleString('ko-KR'),
   };
   try { localStorage.setItem(SAVE_KEY, JSON.stringify(data)); } catch(e) {}
@@ -797,13 +678,17 @@ function loadFromLocal() {
     const set = (id, val) => { const el = document.getElementById(id); if (el) el.value = val || ''; };
     set('name1',d.name1); set('name2',d.name2); set('met',d.met);
     set('story',d.story); set('msg',d.msg); set('kakao',d.kakao); set('phone',d.phone);
-    pickSize('s');
-    if (d.answers) {
-      Object.keys(d.answers).forEach(qid => {
-        const ta = document.querySelector(`#scenes .q-answer[data-qid="${qid}"]`);
-        if (ta) { ta.value = d.answers[qid]; ta.closest('.q-item').classList.add('filled'); }
+    if (d.selType) pickType(d.selType);
+    if (d.selSize) pickSize(d.selSize);
+    if (d.scenes && d.scenes.length) {
+      const list = document.getElementById('scenes');
+      const existing = list.querySelectorAll('textarea');
+      d.scenes.forEach((val, i) => {
+        if (i < existing.length) existing[i].value = val.replace(/^\d+\.\s*/, '');
       });
-      updateQCount();
+    }
+    if (d.chips && d.chips.length) {
+      document.querySelectorAll('.chip').forEach(chip => { if (d.chips.includes(chip.textContent.trim())) chip.classList.add('active'); });
     }
     const bar = document.getElementById('autosave-bar');
     if (bar) {
@@ -818,23 +703,28 @@ function clearSaved() {
   try { localStorage.removeItem(SAVE_KEY); } catch(e) {}
   document.getElementById('autosave-bar').style.display = 'none';
   ['name1','name2','met','story','msg','kakao','phone'].forEach(id => { const el = document.getElementById(id); if (el) el.value = ''; });
+  selType = ''; selSize = '';
+  ['t-tl','t-col'].forEach(id => document.getElementById(id)?.classList.remove('active'));
+  ['s-b','s-s','s-p'].forEach(id => document.getElementById(id)?.classList.remove('active'));
+  document.querySelectorAll('.chip').forEach(c => c.classList.remove('active'));
   document.getElementById('scenes').innerHTML = '';
-  const cb = document.getElementById('consent'); if (cb) { cb.checked = false; onConsent(cb); }
-  pickSize('s');
+  document.getElementById('scene-guide').style.display = 'block';
+  buildPhotoSlots('photo-slots', 8, 'photo');
+  document.getElementById('scene-slots').innerHTML = '';
+  document.getElementById('scene-photo-guide').style.display = 'block';
+  sceneN = 3;
   prog();
 }
 
 window.addEventListener('DOMContentLoaded', async () => {
   buildPhotoSlots('photo-slots', 8, 'photo');
-  initDropZones();
-  pickSize('s');   /* A3 고정 — 질문·슬롯 즉시 생성 */
 
   // URL에 세션 ID가 있으면 Sheets에서 불러오기
   const urlParams = new URLSearchParams(window.location.search);
   const urlId = urlParams.get('sid');
   if (urlId) {
     currentId = urlId;
-    localStorage.setItem('moreen_wedding_sid', urlId);
+    localStorage.setItem('moreen_session_id', urlId);
     await loadFromSheets(urlId);
   } else {
     loadFromLocal();
@@ -847,7 +737,7 @@ function prog() {
     document.getElementById('name1').value.trim(),
     document.getElementById('name2').value.trim(),
     document.getElementById('met').value.trim(),
-    selSize,
+    selType, selSize,
     document.getElementById('story').value.trim(),
     document.getElementById('kakao').value.trim(),
   ];
@@ -863,134 +753,58 @@ function prog() {
   debouncedSave();
 }
 
+/* ━━━ 타입 선택 ━━━ */
+function pickType(t) {
+  selType = t;
+  document.getElementById('t-tl').classList.toggle('active', t === 'tl');
+  document.getElementById('t-col').classList.toggle('active', t === 'col');
+  prog();
+}
 
-/* ━━━ 상품/구성 선택 → 질문 생성 ━━━ */
-function pickSize(sz) {
-  selSize = sz;
-  ['s','p'].forEach(id => document.getElementById('s-'+id)?.classList.toggle('active', id === sz));
-  const cfg = { scenePhotos:20 };   /* 사진 칸은 상품과 무관하게 항상 20칸 */
-  renderQuestions(sz);
+/* ━━━ 사이즈 선택 → 장면/사진 슬롯 자동 생성 ━━━ */
+function pickSize(s) {
+  selSize = s;
+  ['b','s','p'].forEach(id => document.getElementById('s-'+id).classList.toggle('active', id === s));
+
+  const config = {
+    b: { scenes: 6,  scenePhotos: 8  },
+    s: { scenes: 11, scenePhotos: 15 },
+    p: { scenes: 15, scenePhotos: 20 },
+  };
+  const cfg = config[s];
+
+  // 장면 구성 칸
+  const sceneList = document.getElementById('scenes');
+  document.getElementById('scene-guide').style.display = 'none';
+  sceneList.innerHTML = '';
+  sceneN = cfg.scenes;
+
+  const phs = [
+    '예: 첫 데이트에서의 한 장면',
+    '예: 함께 여행 갔던 곳',
+    '예: 우리만의 특별한 루틴',
+    '예: 기억에 남는 에피소드',
+    '예: 평범하지만 소중한 일상의 한 장면',
+  ];
+  for (let i = 1; i <= cfg.scenes; i++) {
+    const row = document.createElement('div');
+    row.className = 'scene-row';
+    row.style.alignItems = 'flex-start';
+    const ph = i === 1
+      ? '첫 만남의 기억을 들려주세요. (첫 대사, 인상 깊었던 대화내용, 스타일, 장소, 분위기 등)'
+      : (phs[i-2] || `장면 ${i}`);
+    row.innerHTML = `<div class="scene-n" style="margin-top:10px;">${i}</div><textarea rows="2" style="font-size:13px;font-family:var(--sans);font-weight:300;color:var(--ink);background:var(--off);border:1.5px solid var(--border);border-radius:var(--r-sm);padding:10px 12px;width:100%;outline:none;resize:none;line-height:1.6;-webkit-appearance:none;" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" data-lpignore="true" data-form-type="other" placeholder="${ph}"></textarea>`;
+    sceneList.appendChild(row);
+  }
+
+  // 인물 사진 (항상 8칸)
   buildPhotoSlots('photo-slots', 8, 'photo');
-  const g = document.getElementById('scene-photo-guide');
-  if (g) g.style.display = 'none';
+
+  // 장면 사진
+  document.getElementById('scene-photo-guide').style.display = 'none';
   buildPhotoSlots('scene-slots', cfg.scenePhotos, 'scene');
+
   prog();
-}
-
-function renderQuestions(sz) {
-  const saved = {};
-  document.querySelectorAll('#scenes .q-answer').forEach(t => { saved[t.dataset.qid] = t.value; });
-  const wrap  = document.getElementById('scenes');
-  const guide = document.getElementById('scene-guide');
-  if (guide) guide.style.display = 'none';
-  wrap.innerHTML = '';
-
-  const isPick = (PICK_N > 0 && sz === 's');
-  const req = QUESTIONS.filter(q => q.req);
-  const opt = QUESTIONS.filter(q => !q.req);
-
-  if (opt.length === 0) {
-    QUESTIONS.forEach(q => wrap.appendChild(qItem(q, true, saved[q.id])));
-  } else {
-    wrap.appendChild(groupHead('필수', req.length + '문항 모두 적어주세요', 'must'));
-    req.forEach(q => wrap.appendChild(qItem(q, true, saved[q.id])));
-    wrap.appendChild(groupHead(
-      isPick ? '선택' : '이어지는 이야기',
-      isPick ? `아래 ${opt.length}문항 중 ${PICK_N}개를 골라 적어주세요`
-             : `${opt.length}문항 · 가능한 모두 적어주세요`, 'pick'));
-    opt.forEach(q => wrap.appendChild(qItem(q, false, saved[q.id])));
-  }
-
-  const c = document.getElementById('q-counter');
-  c.style.display = 'flex';
-  updateQCount();
-}
-
-function groupHead(title, desc, cls) {
-  const d = document.createElement('div');
-  d.className = 'q-group-head';
-  d.innerHTML = `<span>${title}</span><span class="q-group-tag ${cls}">${desc}</span>`;
-  return d;
-}
-
-function qItem(q, isReq, savedVal) {
-  const d = document.createElement('div');
-  d.className = 'q-item' + (isReq ? ' req' : '');
-  d.dataset.qid = q.id;
-  d.innerHTML =
-    `<div class="q-head"><span class="q-no">${q.id}</span>` +
-    `<span class="q-text">${q.t}${isReq ? ' <span class="req">*</span>' : ''}` +
-    (q.eg ? `<span class="q-eg">${q.eg}</span>` : '') +
-    (q.photo ? `<span class="q-note">📷 ${q.photo}</span>` : '') +
-    `</span></div>` +
-    `<textarea class="q-answer" data-qid="${q.id}" data-req="${isReq ? 1 : 0}" rows="3"` +
-    ` placeholder="${q.ph || ''}" oninput="onAnswer(this)"></textarea>`;
-  const ta = d.querySelector('textarea');
-  if (savedVal) { ta.value = savedVal; d.classList.add('filled'); }
-  return d;
-}
-
-function onAnswer(ta) {
-  ta.closest('.q-item').classList.toggle('filled', ta.value.trim() !== '');
-  updateQCount();
-  prog();
-}
-
-function updateQCount() {
-  const c = document.getElementById('q-counter');
-  if (!c || c.style.display === 'none') return;
-  const badge = document.getElementById('q-counter-badge');
-  const text  = document.getElementById('q-counter-text');
-  const all   = document.querySelectorAll('#scenes .q-answer');
-  const filled = [...all].filter(t => t.value.trim() !== '').length;
-
-  if (PICK_N > 0 && selSize === 's') {
-    const optFilled = [...all].filter(t => t.dataset.req === '0' && t.value.trim() !== '').length;
-    badge.textContent = `${optFilled} / ${PICK_N}`;
-    c.classList.toggle('over', optFilled > PICK_N);
-    text.innerHTML = optFilled > PICK_N
-      ? `<strong>${PICK_N}개까지만 담겨요.</strong> 지금 ${optFilled}개를 적으셨어요 — 가장 담고 싶은 ${PICK_N}개만 남겨주세요.`
-      : `필수 ${QUESTIONS.filter(q=>q.req).length}문항을 적고, 나머지 중 <strong>${PICK_N}개</strong>를 골라 적어주세요.`;
-  } else {
-    badge.textContent = `${filled} / ${all.length}`;
-    c.classList.toggle('over', false);
-    text.innerHTML = COUNTER_TEXT(filled, all.length);
-  }
-}
-
-/* ━━━ 답변 수집 / 복원 ━━━ */
-function collectAnswers() {
-  return Array.from(document.querySelectorAll('#scenes .q-answer'))
-    .filter(t => t.value.trim() !== '')
-    .map(t => `[Q${t.dataset.qid}] ${questionText(t.dataset.qid)}\n→ ${t.value.trim()}`)
-    .join('\n\n');
-}
-function questionText(id) { const q = QUESTIONS.find(x => x.id === id); return q ? q.t : ''; }
-function setAnswers(raw) {
-  if (!raw) return;
-  raw.split('\n\n').forEach(block => {
-    const m = block.match(/^\[Q([^\]]+)\][\s\S]*?\n→ ([\s\S]*)$/);
-    if (!m) return;
-    const ta = document.querySelector(`#scenes .q-answer[data-qid="${m[1]}"]`);
-    if (ta) { ta.value = m[2]; ta.closest('.q-item').classList.add('filled'); }
-  });
-  updateQCount();
-}
-
-/* ━━━ 제품 개발 동의 ━━━ */
-function onConsent(el) {
-  const card = document.getElementById('consent-card');
-  card.classList.toggle('agreed', el.checked);
-  card.classList.remove('warn');
-  document.getElementById('consent-label').innerHTML = el.checked
-    ? '네, 동의합니다<span class="sub">감사해요! 제품이 나오면 보내드릴게요 🎁</span>'
-    : '네, 동의합니다<span class="sub">탭해서 켜주세요</span>';
-}
-function flagConsent() {
-  const card = document.getElementById('consent-card');
-  card.classList.add('warn');
-  card.scrollIntoView({ behavior:'smooth', block:'center' });
-  setTimeout(() => card.classList.remove('warn'), 2500);
 }
 
 /* ━━━ 사진 슬롯 생성 ━━━ */
@@ -1027,7 +841,6 @@ function onSlotClick(e) {
   triggerSlotUpload(type, idx);
 }
 
-
 /* ━━━ 슬롯 업로드 트리거 ━━━ */
 function triggerSlotUpload(type, idx) {
   const input = document.getElementById(type === 'photo' ? 'f-photo' : 'f-scene');
@@ -1035,66 +848,57 @@ function triggerSlotUpload(type, idx) {
   input.value = '';
   input.click();
 }
-function slotsOf(type) {
-  return document.getElementById(type === 'photo' ? 'photo-slots' : 'scene-slots')
-                 .querySelectorAll('.photo-slot');
-}
-function bulkUpload(type) {
-  const slots = slotsOf(type);
-  const idx = Array.from(slots).findIndex(s => !s.classList.contains('filled'));
-  if (idx === -1) { alert('모든 칸이 가득 찼어요.\n× 버튼으로 사진을 지운 후 다시 올려주세요.'); return; }
-  triggerSlotUpload(type, idx);
-}
-function initDropZones() {
-  [['drop-photo','photo'], ['drop-scene','scene']].forEach(([id, type]) => {
-    const zone = document.getElementById(id);
-    if (!zone) return;
-    ['dragenter','dragover'].forEach(ev =>
-      zone.addEventListener(ev, e => { e.preventDefault(); e.stopPropagation(); zone.classList.add('dragover'); }));
-    ['dragleave','dragend'].forEach(ev =>
-      zone.addEventListener(ev, e => { e.preventDefault(); e.stopPropagation();
-        if (!zone.contains(e.relatedTarget)) zone.classList.remove('dragover'); }));
-    zone.addEventListener('drop', e => {
-      e.preventDefault(); e.stopPropagation(); zone.classList.remove('dragover');
-      const files = Array.from(e.dataTransfer.files).filter(f => f.type.startsWith('image/'));
-      if (files.length) addFiles(files, type);
-    });
-  });
-  ['dragover','drop'].forEach(ev =>
-    window.addEventListener(ev, e => { if (e.target.closest && !e.target.closest('.photo-drop')) e.preventDefault(); }));
-}
+
+/* ━━━ 사진 업로드 ━━━ */
 function prevPhoto(input, type) {
   const files = Array.from(input.files);
-  const startIdx = parseInt(input.dataset.targetIdx || 0);
-  setTimeout(() => { input.value = ''; }, 100);
   if (!files.length) return;
-  addFiles(files, type, startIdx);
-}
-function addFiles(files, type, startIdx) {
-  const slots = slotsOf(type);
-  if (!slots.length) { alert(NO_SLOT_MSG); return; }
-  let slotIdx = (typeof startIdx === 'number' && !isNaN(startIdx)) ? startIdx : 0;
-  if (slots[slotIdx] && slots[slotIdx].classList.contains('filled'))
-    slotIdx = Array.from(slots).findIndex(s => !s.classList.contains('filled'));
-  if (slotIdx === -1) { alert('모든 칸이 가득 찼어요.\n× 버튼으로 사진을 지운 후 다시 올려주세요.'); return; }
 
-  let placed = 0;
+  const containerId = type === 'photo' ? 'photo-slots' : 'scene-slots';
+  const slots = document.getElementById(containerId).querySelectorAll('.photo-slot');
+  const startIdx = parseInt(input.dataset.targetIdx || 0);
+
+  // 탭한 슬롯부터 빈 칸 순서대로 채우기
+  // 탭한 슬롯이 찼으면 전체에서 첫 번째 빈 슬롯 찾기
+  let slotIdx = startIdx;
+  if (slots[slotIdx] && slots[slotIdx].classList.contains('filled')) {
+    slotIdx = Array.from(slots).findIndex(s => !s.classList.contains('filled'));
+    if (slotIdx === -1) {
+      alert('모든 칸이 가득 찼어요.\n× 버튼으로 사진을 지운 후 다시 올려주세요.');
+      setTimeout(() => { input.value = ''; }, 100);
+      return;
+    }
+  }
+
   files.forEach(file => {
+    // 빈 슬롯 찾기
     while (slotIdx < slots.length && slots[slotIdx].classList.contains('filled')) slotIdx++;
     if (slotIdx >= slots.length) return;
-    const url = URL.createObjectURL(file);
-    const slot = slots[slotIdx], num = slotIdx + 1, idx = slotIdx;
+
+    const url  = URL.createObjectURL(file);
+    const slot = slots[slotIdx];
+    const num  = slotIdx + 1;
+    const idx  = slotIdx;
+
     slot.classList.add('filled');
-    slot.innerHTML =
-      `<img src="${url}" alt="사진 ${num}" style="cursor:zoom-in; position:absolute; inset:0; width:100%; height:100%; object-fit:cover;">` +
-      `<button class="photo-slot-del" onclick="removeSlotPhoto(event,'${type}',${idx})">×</button>` +
-      `<div style="position:absolute;bottom:0;left:0;right:0;background:rgba(0,0,0,0.35);color:white;font-size:9px;text-align:center;padding:2px 0;pointer-events:none;">${num}</div>`;
-    slot.querySelector('img').addEventListener('click', e => { e.stopPropagation(); openLightbox(type, idx); });
+    slot.innerHTML = `
+      <img src="${url}" alt="사진 ${num}" style="cursor:zoom-in; position:absolute; inset:0; width:100%; height:100%; object-fit:cover;">
+      <button class="photo-slot-del" onclick="removeSlotPhoto(event,'${type}',${idx})">×</button>
+      <div style="position:absolute;bottom:0;left:0;right:0;background:rgba(0,0,0,0.35);color:white;font-size:9px;text-align:center;padding:2px 0;pointer-events:none;">${num}</div>
+    `;
+
+    // 라이트박스 — img에만 이벤트
+    slot.querySelector('img').addEventListener('click', (e) => {
+      e.stopPropagation();
+      openLightbox(type, idx);
+    });
+
     photoStore[type][idx] = { file, url };
-    slotIdx++; placed++;
+    slotIdx++;
   });
-  if (placed < files.length)
-    alert(`빈 칸이 ${placed}개뿐이라 ${placed}장만 담았어요.\n(${files.length - placed}장은 담기지 않았어요)`);
+
+  // iOS 대응 초기화
+  setTimeout(() => { input.value = ''; }, 100);
 }
 
 /* ━━━ 슬롯 사진 삭제 ━━━ */
@@ -1250,6 +1054,12 @@ document.addEventListener('keydown', (e) => {
   if (e.key === 'ArrowRight') lbNav(1, null);
 });
 
+/* ━━━ 칩 토글 ━━━ */
+function tog(el, g, single) {
+  if (single) el.closest('.chip-group').querySelectorAll('.chip').forEach(c => c.classList.remove('active'));
+  el.classList.toggle('active');
+}
+
 /* ━━━ 이어쓰기 링크 공유 ━━━ */
 function shareResumeLink() {
   // 현재 내용 즉시 저장 후 링크 생성
@@ -1281,6 +1091,10 @@ function showShareToast() {
 
 /* ━━━ 데이터 수집 ━━━ */
 function collect() {
+  const scenesRaw = Array.from(document.querySelectorAll('#scenes textarea')).map(i => i.value.trim()).filter(Boolean);
+  const scenes  = scenesRaw.map((s, i) => `${i+1}. ${s}`).join('\n');
+  const chips   = Array.from(document.querySelectorAll('.chip.active')).map(c => c.textContent.trim()).join(', ');
+  const sizeMap = { b:'베이직(A4)', s:'시그니처(A3)', p:'프리미엄(A2)' };
   return {
     id:         currentId,
     상태:       '완료',
@@ -1288,9 +1102,11 @@ function collect() {
     'Person 1': document.getElementById('name1').value.trim(),
     'Person 2': document.getElementById('name2').value.trim(),
     '만난 날':  document.getElementById('met').value.trim(),
-    상품:       'A3(10장면) · 웨딩',
+    유형:       selType === 'tl' ? 'Timeline' : selType === 'col' ? 'Collection' : '',
+    상품:       sizeMap[selSize] || '',
     이야기:     document.getElementById('story').value.trim(),
-    장면:       collectAnswers(),
+    장면:       scenes,
+    분위기:     chips,
     메시지:     document.getElementById('msg')?.value.trim() || '',
     카카오:     document.getElementById('kakao').value.trim(),
     전화:       document.getElementById('phone')?.value.trim() || '',
@@ -1302,30 +1118,11 @@ function collect() {
 function validate(d) {
   if (!d['Person 1'] || !d['Person 2']) { alert('두 분 이름을 입력해주세요 😊'); return false; }
   if (!d['만난 날'])  { alert('처음 만난 날을 입력해주세요'); return false; }
-
-  if (!d['이야기'])   { alert('우리 커플 소개를 적어주세요'); return false; }
-
-  const missing = Array.from(document.querySelectorAll('#scenes .q-answer'))
-    .filter(t => t.dataset.req === '1' && t.value.trim() === '')
-    .map(t => 'Q' + t.dataset.qid);
-  if (missing.length) {
-    alert('장면 구성의 필수 질문에 답해주세요\n( ' + missing.join(', ') + ' )');
-    return false;
-  }
-
-  if (PICK_N > 0 && selSize === 's') {
-    const n = Array.from(document.querySelectorAll('#scenes .q-answer'))
-      .filter(t => t.dataset.req === '0' && t.value.trim() !== '').length;
-    if (n < PICK_N) { alert(`선택 질문을 ${PICK_N}개 적어주세요.\n지금 ${n}개 적으셨어요.`); return false; }
-    if (n > PICK_N) { alert(`선택 질문은 ${PICK_N}개까지예요.\n지금 ${n}개 적으셨어요 — ${n - PICK_N}개를 비워주세요.`); return false; }
-  }
-
+  if (!d['유형'])     { alert('스토리 유형을 선택해주세요'); return false; }
+  if (!d['상품'])     { alert('상품을 선택해주세요'); return false; }
+  if (!d['이야기'])   { alert('우리 이야기를 적어주세요'); return false; }
   if (!d['카카오'])   { alert('카카오톡 아이디를 입력해주세요'); return false; }
-  if (!document.getElementById('consent')?.checked) {
-    flagConsent();
-    alert('마지막에 있는 "두 분의 일러스트를 모린 제품으로 만들어도 될까요?"\n동의를 켜주세요 🙏');
-    return false;
-  }
+  if (!document.getElementById('consent')?.checked) { alert('본 일러스트 적용한 제품 개발 동의를 체크해주세요'); return false; }
   return true;
 }
 
@@ -1358,7 +1155,7 @@ async function doSubmit() {
     // 3. 완료 처리
     try {
       localStorage.removeItem(SAVE_KEY);
-      localStorage.removeItem('moreen_wedding_sid');
+      localStorage.removeItem('moreen_session_id');
     } catch(e) {}
 
     document.getElementById('main').style.display = 'none';
@@ -1368,7 +1165,7 @@ async function doSubmit() {
   } catch(err) {
     console.error('제출 오류:', err);
     btn.classList.remove('loading');
-    btn.textContent = 'Wedding Story 제출하기 →';
+    btn.textContent = 'Love Story 제출하기 →';
     alert('오류가 발생했어요. 잠시 후 다시 시도해주세요.');
   }
 }
