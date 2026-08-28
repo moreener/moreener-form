@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 <meta name="color-scheme" content="light only">
 <meta name="theme-color" content="#ffffff">
-<title>moreen — 웨딩 러브스토리 액자 Story Form</title>
+<title>moreen love story form</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700&family=Plus+Jakarta+Sans:wght@300;400&display=swap" rel="stylesheet">
 <style>
@@ -94,8 +94,25 @@ body {
 .cover-title { font-family: var(--serif); font-size: 34px; line-height: 1.22; color: var(--black); margin-bottom: 18px; letter-spacing: -0.5px; font-weight: 300; }
 .cover-sub { font-size: 14px; color: var(--ink-sub); line-height: 1.95; margin-bottom: 28px; font-weight: 400; }
 .cover-sub strong { color: var(--ink); font-weight: 500; }
-.cover-badge { display: inline-flex; align-items: center; gap: 7px; background: var(--mint-lt); color: var(--mint-dk); font-size: 12px; padding: 7px 15px; border-radius: var(--r-lg); font-weight: 500; border: 1px solid var(--mint-bd); }
-.cover-badge::before { content: ''; width: 6px; height: 6px; border-radius: 50%; background: var(--mint-dk); opacity: 0.7; }
+.cover-badge { display: inline-flex; align-items: center; justify-content: center; background: var(--mint-lt); color: var(--mint-dk); font-size: 12px; padding: 7px 18px; border-radius: var(--r-lg); font-weight: 500; border: 1px solid var(--mint-bd); }
+
+
+/* ── 통합 폼 추가 스타일 ── */
+#type-screen .cover { border-bottom: none; }          /* 선택 화면 구분선 삭제 */
+#main .cover { position: relative; }
+#type-back {
+  position: absolute; top: 78px; right: 22px;
+  width: 72px; height: 72px; border-radius: 50%;
+  border: 1px solid var(--mint-bd); background: transparent;
+  display: flex; flex-direction: column; align-items: center; justify-content: center;
+  padding: 0; cursor: pointer; font-family: inherit; color: var(--mint-dk);
+  line-height: 1.3; -webkit-tap-highlight-color: transparent;
+  transition: background .15s, border-color .15s;
+}
+#type-back:active { background: var(--mint-lt); border-color: var(--mint); }
+#type-back .tb-arrow { font-size: 15px; line-height: 1; margin-bottom: 4px; }
+#type-back .tb-txt   { font-size: 10.5px; font-weight: 500; letter-spacing: -0.2px; }
+#main .cover-eyebrow, #main .cover-title { padding-right: 82px; }
 
 /* ── REQ NOTE ── */
 .req-note { font-size: 11.5px; color: var(--ink-sub); padding: 14px 26px; border-bottom: 1px solid var(--border); background: var(--off); }
@@ -359,10 +376,10 @@ input::placeholder, textarea::placeholder { color: var(--ink-ph); font-weight: 3
 </div>
 
 <!-- PROGRESS -->
-<div class="progress-wrap">
+<div class="progress-wrap" id="prog-wrap" style="display:none;">
   <div class="progress-row">
     <span class="progress-brand">moreen</span>
-    <span class="progress-status" id="prog-status">wedding love story</span>
+    <span class="progress-status" id="prog-status">love story form</span>
   </div>
   <div class="progress-track"><div class="progress-fill" id="prog-fill"></div></div>
 </div>
@@ -376,15 +393,47 @@ input::placeholder, textarea::placeholder { color: var(--ink-ph); font-weight: 3
   <div class="success-badge">moreen</div>
 </div>
 
+
+<!-- TYPE SELECT -->
+<div id="type-screen">
+<div class="form-outer">
+  <div class="cover">
+    <div class="cover-eyebrow">moreen · love story form</div>
+    <div class="cover-title" style="font-family:'Courier New',Courier,monospace; font-size:18px; font-weight:700; letter-spacing:4px; margin-bottom:27px;">The Days We Create</div>
+    <div class="cover-title" style="font-size:22px; font-weight:300; line-height:1.6; margin-bottom:18px;">어떤 액자를<br>주문하셨나요?</div>
+    <div class="cover-sub">주문하신 상품을 골라주시면<br><strong>그에 맞는 질문</strong>을 보여드릴게요.</div>
+  </div>
+  <div style="padding:0 26px 40px;">
+    <div class="size-list">
+      <div class="size-card" onclick="pickType('w')">
+        <div class="size-left"><div class="radio"><div class="radio-inner"></div></div>
+          <div><div class="size-name">웨딩 러브스토리</div></div></div>
+        <div class="size-price">A3 · 10장면</div>
+      </div>
+      <div class="size-card" onclick="pickType('c')">
+        <div class="size-left"><div class="radio"><div class="radio-inner"></div></div>
+          <div><div class="size-name">커플 러브스토리</div></div></div>
+        <div class="size-price">A3 / A2</div>
+      </div>
+    </div>
+  </div>
+</div>
+</div>
+
 <!-- FORM -->
-<div id="main">
+<div id="main" style="display:none;">
 <div class="form-outer">
 
   <!-- COVER -->
   <div class="cover">
-    <div class="cover-eyebrow">moreen · wedding love story · A3</div>
-    <div class="cover-title" style="font-family:'Courier New',Courier,monospace; font-size:18px; font-weight:700; letter-spacing:4px; margin-bottom:10px;">The Days We Create</div>
-    <div class="cover-title" style="font-size:22px; font-weight:300; margin-bottom:18px;">처음 만난 날부터,<br>우리가 하나가 되기까지.</div>
+    <button type="button" id="type-back" onclick="backToType()" aria-label="다른 상품 선택">
+      <span class="tb-arrow">←</span>
+      <span class="tb-txt">다른 상품</span>
+      <span class="tb-txt">선택</span>
+    </button>
+    <div class="cover-eyebrow" id="cover-eyebrow">moreen · love story form</div>
+    <div class="cover-title" style="font-family:'Courier New',Courier,monospace; font-size:18px; font-weight:700; letter-spacing:4px; margin-bottom:27px;">The Days We Create</div>
+    <div class="cover-title" id="cover-lead" style="font-size:22px; font-weight:300; line-height:1.6; margin-bottom:18px;">처음 만난 날부터,<br>하나가 되기까지.</div>
     <div class="cover-sub">어렵게 생각하지 마세요.<br><strong>친한 친구에게 얘기하듯</strong> 편하게 적어주시면 돼요.</div>
     <div class="cover-badge">확인후 궁금한 내용은 추가 문의드리니 걱정마세요.</div>
   </div>
@@ -432,10 +481,26 @@ input::placeholder, textarea::placeholder { color: var(--ink-ph); font-weight: 3
   <hr class="section-divider" style="margin-left:26px;margin-right:26px;">
   <div style="padding:0 26px;">
 
-    <!-- 상품 안내 (A3 고정) -->
-    <div class="notice" style="border-color:var(--mint-bd);background:var(--mint-bg);">
+    <!-- 상품 안내 (웨딩 = A3 고정) -->
+    <div class="notice" id="wed-notice" style="display:none;border-color:var(--mint-bd);background:var(--mint-bg);">
       <strong>A3 · 웨딩 러브스토리 액자</strong><br>
       <span style="font-weight:400;">처음 만난 날부터 결혼까지, <em>10장면</em>을 한 장에 담아드려요.</span>
+    </div>
+
+    <!-- 상품 선택 (커플 = A3 / A2) -->
+    <div class="card" id="size-card" style="display:none;">
+      <div class="label">상품 선택 <span class="req">*</span></div>
+      <div class="hint"><strong>장면 수</strong> = 그림에 담기는 에피소드 수예요</div>
+      <div class="size-list">
+        <div class="size-card" id="s-s" onclick="pickSize('s')">
+          <div class="size-left"><div class="radio"><div class="radio-inner"></div></div><div><div class="size-name">A3</div></div></div>
+          <div class="size-price">10장면 의뢰</div>
+        </div>
+        <div class="size-card" id="s-p" onclick="pickSize('p')">
+          <div class="size-left"><div class="radio"><div class="radio-inner"></div></div><div><div class="size-name">A2</div></div></div>
+          <div class="size-price">15장면 의뢰</div>
+        </div>
+      </div>
     </div>
 
     <!-- 우리 이야기 -->
@@ -657,9 +722,12 @@ input::placeholder, textarea::placeholder { color: var(--ink-ph); font-weight: 3
 
 <script>
 /* ━━━ 상태 변수 ━━━ */
-let selSize = 's';
+let selType = '';        /* 'w' 웨딩 · 'c' 커플 */
+let selSize = '';        /* 's' A3(10장면) · 'p' A2(15장면) */
 
-const QUESTIONS = [
+/* ━━━ 상품별 문항 세트 ━━━ */
+const QSET = {
+  w: [
   { id:'1-1', req:true, t:'처음 만난 날 입고 있던 옷과 머리스타일 등에 대해 설명해주세요.',
     eg:'첫 장면이 됩니다 — 그날의 두 분 모습이 그려지도록 적어주세요',
     ph:'예: 그는 회색 후드에 검은 뿔테, 저는 청바지에 흰 셔츠였어요. 머리는 어깨까지 오는 단발.' },
@@ -692,21 +760,151 @@ const QUESTIONS = [
   { id:'10',  req:true, t:'두 사람에게 상징적인 물건이나 선물이 있다면 알려주세요.',
     eg:'커플링, 처음 받은 선물, 함께 고른 물건, 반려동물 등 — 그림 안에 함께 담아드려요',
     ph:'예: 첫 기념일에 주고받은 손목시계를 지금도 둘 다 차고 다녀요.' },
-];
+  ],
+  c: [
+  { id:'1-1', req:true,  t:'처음 만난 날 입고 있던 옷과 머리스타일 등에 대해 설명해주세요.',
+    ph:'예: 그는 회색 후드에 검은 뿔테, 저는 청바지에 흰 셔츠였어요. 머리는 어깨까지 오는 단발.' },
+  { id:'1-2', req:true,  t:'첫 만남에서 나눈 인상적인 대화내용을 적어주세요.',
+    ph:'예: "강아지 키우세요?" 한마디로 두 시간을 떠들었어요.' },
+  { id:'2',   req:true,  t:'두 사람이 서로에게 특별한 사람이 된 날의 이야기를 해주세요.',
+    eg:'고백했던 날도 좋고, 사귀기로 한 날의 이야기, 또는 연인이 된 계기가 된 사건 등',
+    ph:'예: 한강에서 자전거 타다가 비를 쫄딱 맞고, 편의점 앞에서 고백했어요.' },
+  { id:'3',   t:'연애시절, 두 사람의 일상적인 특이사항을 알려주세요.',
+    eg:'예를 들면 장거리 연애 에피소드, 동네커플 에피소드, 사내커플 에피소드 등',
+    ph:'예: 서울–부산 장거리라 금요일 밤마다 SRT에서 만났어요.' },
+  { id:'4',   t:'두 사람의 성격, 둘의 관계에서 오는 특징이 나타나는 에피소드 또는 일상 대화 장면을 떠올려 적어주세요.',
+    ph:'예: 저는 계획형, 그는 즉흥형이라 여행 갈 때마다 티격태격해요.' },
+  { id:'5',   t:'두 사람이 함께 시작했던 취미나 활동 또는 둘이 만나면 자주 가던 장소에 대한 이야기를 들려주세요.',
+    ph:'예: 매주 토요일 성수동 카페 투어가 우리 루틴이었어요.' },
+  { id:'6',   t:'둘이 함께 즐거워 했던 또 다른 활동이나 순간, 여행 등의 에피소드를 적어주세요.',
+    eg:'연애시절·신혼시절 관계없이 · 질문5와 비슷한 맥락',
+    ph:'예: 제주도에서 스쿠터 타고 해안도로를 달렸던 날.' },
+  { id:'7',   t:'결혼식 — 결혼식날의 장면을 설명해주세요.',
+    eg:'그날의 분위기, 기억에 남는 순간을 적어주세요',
+    photo:'결혼식날 두 분의 정면 사진은 C. 사진 업로드 파트에 꼭 올려주세요 (필수)',
+    ph:'예: 야외 결혼식이었는데 하필 비가 와서 다 같이 우산 쓰고 사진 찍었어요.' },
+  { id:'8',   t:'신혼여행에서 인상깊었던 에피소드나 남기고 싶은 장면을 설명해 주세요.',
+    ph:'예: 발리에서 일출 보려고 새벽 4시에 일어났는데 둘 다 졸아서 못 봤어요.' },
+  { id:'9',   t:'두 사람이 함께 있을때 자주 일어나는 행운의 법칙이나 머피의 법칙, 또는 특이사항, 특징적인 장면을 생각해보고 적어주세요.',
+    ph:'예: 둘이 여행만 가면 무조건 비가 와요. 우산이 늘 가방에 있어요.' },
+  { id:'10',  t:'아이가 있다면, 육아시절을 대표할만한 장면을 적어주세요.',
+    eg:'반려동물과의 사진도 괜찮고, 아이가 없다면 두분의 가족사진도 좋고 다른 장면으로 채우셔도 돼요.',
+    photo:'가족사진은 C. 사진 업로드 파트에 올려주세요',
+    ph:'예: 아기 밥시간마다 강아지들이 식탁 밑으로 모여들어요.' },
+  { id:'11',  t:'봄·여름·가을·겨울 중, 어떤 한 계절이 오면, 두 사람이 매년 하는 활동이 있다면 적어주세요.',
+    eg:'예: 봄이면 벚꽃놀이, 여름이면 호캉스, 가을이면 캠핑, 겨울이면 눈사람 — 장면이 그려지듯 적어주세요',
+    ph:'예: 봄이면 석촌호수 한 바퀴 돌면서 벚꽃 아래서 사진을 찍어요.' },
+  { id:'12',  t:'결혼 후, 두 사람의 기억에 남는 여행 또는 취미 활동을 적어주세요.',
+    eg:'여행지 또는 취미활동 에피소드',
+    ph:'예: 주말마다 텃밭에 나가 상추를 따요. 얼굴만한 고구마도 캐요.' },
+  { id:'13',  t:'두 사람이 함께하는 일상의 낙이 있다면 적어주세요.',
+    eg:'치맥타임, 저녁산책, 드라마 정주행…',
+    ph:'예: 밤에 침대에 나란히 누워 드라마 보는 시간. 맥주 한 캔씩 들고요.' },
+  { id:'14',  t:'다른 사람에게 혹은 아이들에게 자랑하고 싶은 두 사람의 모습을 하나 떠올려보세요.',
+    ph:'예: 매일 아침 그가 커피를 내려주는데, 5년째 한 번도 안 빼먹었어요.' },
+  { id:'15',  t:'결혼기념일 또는 생일, 크리스마스 등 특별한 날에 두 사람은 어떻게 보내나요?',
+    eg:'그런 날의 일상적인 에피소드도 좋고, 어떤 한 날의 에피소드를 적어도 좋아요',
+    ph:'예: 기념일마다 처음 갔던 그 식당에 가서 같은 메뉴를 시켜요.' },
+  ]
+};
 
-const PICK_N = 0;   /* 웨딩 A3 : 11문항 모두 필수 (선택 문항 없음) */
+/* ━━━ 상품별 설정 ━━━ */
+const TYPE_CFG = {
+  w: {
+    label   : '웨딩 러브스토리',
+    eyebrow : 'moreen · wedding love story',
+    lead    : '처음 만난 날부터,<br>하나가 되기까지.',
+    btn     : 'Wedding Story 제출하기 →',
+    pickN   : 0,
+    fixedSize: 's',
+    product : () => 'A3(10장면) · 웨딩',
+    counter : (n, total) => n >= total
+      ? `<strong>${total}문항 모두 작성 완료!</strong> 이제 사진만 올려주시면 돼요.`
+      : `A3 · 10장면 — <strong>아래 ${total}문항을 모두</strong> 적어주세요. (${total - n}문항 남았어요)`,
+    noSlot  : '사진 슬롯을 불러오는 중이에요. 잠시 후 다시 시도해주세요.',
+    sceneGuide: ''
+  },
+  c: {
+    label   : '커플 러브스토리',
+    eyebrow : 'moreen · couple love story',
+    lead    : '두 분이 만들어 가고 있는<br>이야기를 들려주세요.',
+    btn     : 'Love Story 제출하기 →',
+    pickN   : 8,
+    fixedSize: null,
+    product : () => ({ s:'A3(10장면) · 커플', p:'A2(15장면) · 커플' })[selSize] || '',
+    counter : (n, total) => `A2는 15장면이에요. <strong>${total}문항을 가능한 모두</strong> 적어주시면 가장 좋아요. (지금 ${n}문항)`,
+    noSlot  : '먼저 위에서 상품(A3 / A2)을 선택해주세요 😊',
+    sceneGuide: '<strong>위에서 상품을 먼저 선택하면</strong> 사진 슬롯이 자동으로 만들어져요 😊'
+  }
+};
 
-const COUNTER_TEXT = (n, total) => n >= total
-  ? `<strong>${total}문항 모두 작성 완료!</strong> 이제 사진만 올려주시면 돼요.`
-  : `A3 · 10장면 — <strong>아래 ${total}문항을 모두</strong> 적어주세요. (${total - n}문항 남았어요)`;
-const NO_SLOT_MSG = '사진 슬롯을 불러오는 중이에요. 잠시 후 다시 시도해주세요.';
+let QUESTIONS    = [];
+let PICK_N       = 0;
+let COUNTER_TEXT = (n, total) => '';
+let NO_SLOT_MSG  = '';
+
+/* ━━━ 상품 종류 선택 ━━━ */
+function pickType(t, skipRender) {
+  if (!TYPE_CFG[t]) return;
+  selType      = t;
+  const cfg    = TYPE_CFG[t];
+  QUESTIONS    = QSET[t];
+  PICK_N       = cfg.pickN;
+  COUNTER_TEXT = cfg.counter;
+  NO_SLOT_MSG  = cfg.noSlot;
+
+  document.getElementById('type-screen').style.display = 'none';
+  document.getElementById('main').style.display        = 'block';
+  document.getElementById('prog-wrap').style.display   = 'block';
+
+  document.getElementById('cover-eyebrow').textContent = cfg.eyebrow;
+  document.getElementById('cover-lead').innerHTML      = cfg.lead;
+  const btn = document.getElementById('sub-btn'); if (btn) btn.textContent = cfg.btn;
+
+  document.getElementById('wed-notice').style.display = (t === 'w') ? 'block' : 'none';
+  document.getElementById('size-card').style.display  = (t === 'c') ? 'block' : 'none';
+
+  const g = document.getElementById('scene-photo-guide');
+  if (g) {
+    g.innerHTML = cfg.sceneGuide;
+    g.style.display = cfg.sceneGuide ? 'block' : 'none';
+    g.style.cssText += cfg.sceneGuide
+      ? ';font-size:12px;color:var(--mint-dk);background:var(--mint-bg);border:1px solid var(--mint-bd);border-radius:var(--r-sm);padding:10px 14px;margin-bottom:8px;'
+      : '';
+  }
+
+  if (cfg.fixedSize) {
+    if (!skipRender) pickSize(cfg.fixedSize);
+  } else {
+    selSize = '';
+    ['s-s','s-p'].forEach(id => document.getElementById(id)?.classList.remove('active'));
+    document.getElementById('scenes').innerHTML = '';
+    document.getElementById('scene-slots').innerHTML = '';
+    const sg = document.getElementById('scene-guide'); if (sg) sg.style.display = 'block';
+    const qc = document.getElementById('q-counter');   if (qc) qc.style.display = 'none';
+    buildPhotoSlots('photo-slots', 8, 'photo');
+    if (!skipRender) prog();
+  }
+  window.scrollTo(0, 0);
+}
+
+function backToType() {
+  document.getElementById('main').style.display        = 'none';
+  document.getElementById('prog-wrap').style.display   = 'none';
+  document.getElementById('type-screen').style.display = 'block';
+  window.scrollTo(0, 0);
+}
+
+function productLabel() {
+  return selType ? TYPE_CFG[selType].product() : '';
+}
 const photoStore = { photo: [], scene: [] };
 
 /* ━━━ Google Sheets ━━━ */
 const SHEET_URL = 'https://script.google.com/macros/s/AKfycby1Z3Lzs2PwbBVumDwbXqpsg9tUpIexwCdxgJRx8oGRf25gL0-XS1o2V1TiZNN2JvpJzA/exec';
-let currentId = localStorage.getItem('moreen_wedding_sid') || (() => {
+let currentId = localStorage.getItem('moreen_sid') || (() => {
   const id = 'tmp_' + Date.now() + '_' + Math.random().toString(36).slice(2,7);
-  localStorage.setItem('moreen_wedding_sid', id);
+  localStorage.setItem('moreen_sid', id);
   return id;
 })();
 let saveTimer = null;
@@ -719,7 +917,7 @@ async function saveToSheets(status = '임시저장') {
       'Person 1': document.getElementById('name1')?.value || '',
       'Person 2': document.getElementById('name2')?.value || '',
       '만난 날': document.getElementById('met')?.value || '',
-      상품: 'A3(10장면) · 웨딩',
+      상품: productLabel(),
       이야기: document.getElementById('story')?.value || '',
       장면: collectAnswers(),
       메시지: document.getElementById('msg')?.value || '',
@@ -755,7 +953,9 @@ async function loadFromSheets(id) {
     set('msg',   d['메시지']);   set('kakao', d['카카오']);
     set('phone', d['전화']);
 
-    pickSize('s');
+    const rev = { 'A3(10장면) · 웨딩':['w','s'], 'A3(10장면) · 커플':['c','s'], 'A2(15장면) · 커플':['c','p'] };
+    const hit = rev[d['상품']];
+    if (hit) { pickType(hit[0], true); pickSize(hit[1]); }
     setAnswers(d['장면']);
 
     if (bar) {
@@ -768,7 +968,7 @@ async function loadFromSheets(id) {
 }
 
 /* ━━━ 로컬 저장 ━━━ */
-const SAVE_KEY = 'moreen_wedding_form_v1';
+const SAVE_KEY = 'moreen_form_v2';
 function saveToLocal() {
   const answers = {};
   document.querySelectorAll('#scenes .q-answer').forEach(t => {
@@ -782,7 +982,7 @@ function saveToLocal() {
     msg:   document.getElementById('msg')?.value   || '',
     kakao: document.getElementById('kakao')?.value || '',
     phone: document.getElementById('phone')?.value || '',
-    selSize, answers,
+    selType, selSize, answers,
     savedAt: new Date().toLocaleString('ko-KR'),
   };
   try { localStorage.setItem(SAVE_KEY, JSON.stringify(data)); } catch(e) {}
@@ -797,7 +997,7 @@ function loadFromLocal() {
     const set = (id, val) => { const el = document.getElementById(id); if (el) el.value = val || ''; };
     set('name1',d.name1); set('name2',d.name2); set('met',d.met);
     set('story',d.story); set('msg',d.msg); set('kakao',d.kakao); set('phone',d.phone);
-    pickSize('s');
+    if (d.selType) { pickType(d.selType, true); if (d.selSize) pickSize(d.selSize); }
     if (d.answers) {
       Object.keys(d.answers).forEach(qid => {
         const ta = document.querySelector(`#scenes .q-answer[data-qid="${qid}"]`);
@@ -820,21 +1020,21 @@ function clearSaved() {
   ['name1','name2','met','story','msg','kakao','phone'].forEach(id => { const el = document.getElementById(id); if (el) el.value = ''; });
   document.getElementById('scenes').innerHTML = '';
   const cb = document.getElementById('consent'); if (cb) { cb.checked = false; onConsent(cb); }
-  pickSize('s');
+  if (selType) pickType(selType);
   prog();
 }
 
 window.addEventListener('DOMContentLoaded', async () => {
   buildPhotoSlots('photo-slots', 8, 'photo');
   initDropZones();
-  pickSize('s');   /* A3 고정 — 질문·슬롯 즉시 생성 */
+  /* 상품 종류를 고르기 전에는 폼을 열지 않습니다 */
 
   // URL에 세션 ID가 있으면 Sheets에서 불러오기
   const urlParams = new URLSearchParams(window.location.search);
   const urlId = urlParams.get('sid');
   if (urlId) {
     currentId = urlId;
-    localStorage.setItem('moreen_wedding_sid', urlId);
+    localStorage.setItem('moreen_sid', urlId);
     await loadFromSheets(urlId);
   } else {
     loadFromLocal();
@@ -1288,7 +1488,7 @@ function collect() {
     'Person 1': document.getElementById('name1').value.trim(),
     'Person 2': document.getElementById('name2').value.trim(),
     '만난 날':  document.getElementById('met').value.trim(),
-    상품:       'A3(10장면) · 웨딩',
+    상품:       productLabel(),
     이야기:     document.getElementById('story').value.trim(),
     장면:       collectAnswers(),
     메시지:     document.getElementById('msg')?.value.trim() || '',
@@ -1302,6 +1502,8 @@ function collect() {
 function validate(d) {
   if (!d['Person 1'] || !d['Person 2']) { alert('두 분 이름을 입력해주세요 😊'); return false; }
   if (!d['만난 날'])  { alert('처음 만난 날을 입력해주세요'); return false; }
+  if (!selType)       { alert('상품 종류를 선택해주세요 (웨딩 / 커플)'); return false; }
+  if (!d['상품'])     { alert('상품(A3 / A2)을 선택해주세요'); return false; }
 
   if (!d['이야기'])   { alert('우리 커플 소개를 적어주세요'); return false; }
 
@@ -1358,7 +1560,7 @@ async function doSubmit() {
     // 3. 완료 처리
     try {
       localStorage.removeItem(SAVE_KEY);
-      localStorage.removeItem('moreen_wedding_sid');
+      localStorage.removeItem('moreen_sid');
     } catch(e) {}
 
     document.getElementById('main').style.display = 'none';
@@ -1368,7 +1570,7 @@ async function doSubmit() {
   } catch(err) {
     console.error('제출 오류:', err);
     btn.classList.remove('loading');
-    btn.textContent = 'Wedding Story 제출하기 →';
+    btn.textContent = selType ? TYPE_CFG[selType].btn : 'Love Story 제출하기 →';
     alert('오류가 발생했어요. 잠시 후 다시 시도해주세요.');
   }
 }
