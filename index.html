@@ -412,7 +412,7 @@ input::placeholder, textarea::placeholder { color: var(--ink-ph); font-weight: 3
       </div>
       <div class="size-card" onclick="pickType('c')">
         <div class="size-left"><div class="radio"><div class="radio-inner"></div></div>
-          <div><div class="size-name">커플 러브스토리</div></div></div>
+          <div><div class="size-name">커플 라이프스토리</div></div></div>
         <div class="size-price">A3 / A2</div>
       </div>
     </div>
@@ -825,10 +825,10 @@ const TYPE_CFG = {
     sceneGuide: ''
   },
   c: {
-    label   : '커플 러브스토리',
-    eyebrow : 'moreen · couple love story',
+    label   : '커플 라이프스토리',
+    eyebrow : 'moreen · couple life story',
     lead    : '두 분이 만들어 가고 있는<br>이야기를 들려주세요.',
-    btn     : 'Love Story 제출하기 →',
+    btn     : 'Life Story 제출하기 →',
     pickN   : 8,
     fixedSize: null,
     product : () => ({ s:'A3(10장면) · 커플', p:'A2(15장면) · 커플' })[selSize] || '',
@@ -1570,7 +1570,7 @@ async function doSubmit() {
   } catch(err) {
     console.error('제출 오류:', err);
     btn.classList.remove('loading');
-    btn.textContent = selType ? TYPE_CFG[selType].btn : 'Love Story 제출하기 →';
+    btn.textContent = selType ? TYPE_CFG[selType].btn : 'Story 제출하기 →';
     alert('오류가 발생했어요. 잠시 후 다시 시도해주세요.');
   }
 }
